@@ -1030,109 +1030,116 @@ function renderPaymentSection() {
     // Categorize by payment status
     const groups = [
         {
-            title: '✅ Đủ Điều Kiện & Đã Thanh Toán Đợt 1+2',
-            color: 'var(--accent-emerald)',
-            bg: 'rgba(16,185,129,0.08)',
+            title: '⏳ Đến Hạn Đợt 3 Chưa Thanh Toán',
+            color: 'var(--accent-purple)',
+            bg: 'rgba(168,85,247,0.08)',
             items: [
                 {
                     name: 'KHAI SƠN (CGI — 33 view)',
-                    detail: 'Payment: 4 đợt (Đ1-20%, Đ2-30% NT 40%, Đ3-30% NT 70%, Đ4-20%). ✅ Đã thanh toán Đ1 & Đ2. ⏳ Đã đến hạn thanh toán Đ3 → Growth chuẩn bị hồ sơ, follow thu hồi công nợ.',
+                    detail: 'Payment: 4 đợt (Đ1-20%, Đ2-30% NT 40%, Đ3-30% NT 70%, Đ4-20%). ✅ Đã thanh toán Đ1 & Đ2. ⏳ Đến hạn đợt 3 chưa thanh toán → Growth chuẩn bị hồ sơ, follow thu hồi công nợ.',
                     statusClass: 'pay-status-ready'
                 },
             ]
         },
         {
-            title: '✅ Đủ Điều Kiện & Đã Thanh Toán Đợt 1',
-            color: 'var(--accent-cyan)',
-            bg: 'rgba(34,211,238,0.08)',
+            title: '⏳ Đến Hạn Đợt 2 Chưa Thanh Toán',
+            color: 'var(--accent-orange)',
+            bg: 'rgba(251,146,60,0.08)',
             items: [
                 {
-                    name: 'VŨ YÊN (4 hạng mục: CGI + 2 Animation + VR360)',
-                    detail: 'Payment: 4 đợt (Đ1-20%, Đ2-30% NT 40%, Đ3-30% NT 70%, Đ4-20%). ✅ Đã thanh toán Đ1. ❌ Chưa đủ điều kiện thanh toán Đ2.',
-                    statusClass: 'pay-status-pending'
-                },
-                {
                     name: 'ĐÔNG TĂNG LONG (CGI)',
-                    detail: 'Payment: 3 đợt (Đ1-50%, Đ2-20%, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đã đến hạn thanh toán Đ2. Growth hoàn thành hồ sơ, chờ thanh toán. ⚡ PMO: Ngưng triển khai đến khi nhận Đ2.',
+                    detail: 'Payment: 3 đợt (Đ1-50%, Đ2-20%, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đến hạn đợt 2 chưa thanh toán (quá hạn từ 14/08). ⚡ PMO: Ngưng triển khai đến khi nhận Đ2.',
                     statusClass: 'pay-status-blocked'
                 },
                 {
-                    name: 'PHỐ NỐI (3 hạng mục: CGI + Animation + VR360)',
-                    detail: 'CGI: 3 đợt (Đ1-30%, Đ2-40% NT 60%, Đ3-30%). VR360: 3 đợt (Đ1-40%, Đ2-30% NT 70%, Đ3-30%). ✅ Đã thanh toán Đ1 cả 2 HĐ. ❌ Chưa đủ điều kiện Đ2.',
-                    statusClass: 'pay-status-pending'
-                },
-                {
-                    name: 'OCP1.2 (CGI)',
-                    detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT 60%, Đ3-30%). ✅ Đã thanh toán Đ1. ✅ Đã đủ điều kiện thanh toán Đ2. PM thông tin cho Growth làm hồ sơ thanh toán.',
+                    name: 'THE WIN CITY (CGI + Animation)',
+                    detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT hình nháp + phim nháp, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đến hạn đợt 2 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
                 {
-                    name: 'THE WIN CITY (CGI + Animation)',
-                    detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT hình nháp + phim nháp, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đã đến hạn thanh toán Đ2. Growth hoàn thành hồ sơ, chờ thanh toán.',
+                    name: 'OCP1.2 (CGI)',
+                    detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT 60%, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đến hạn đợt 2 chưa thanh toán → Growth cập nhật phụ lục chờ KH ký bản cứng, PM thông tin cho Growth làm hồ sơ thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
             ]
         },
         {
-            title: '⏳ Đủ Điều Kiện Thanh Toán Đợt 1 — Chưa Thanh Toán',
+            title: '⏳ Đến Hạn Đợt 1 Chưa Thanh Toán',
             color: 'var(--accent-amber)',
             bg: 'rgba(245,158,11,0.08)',
             items: [
                 {
                     name: 'ECO PK5 + PK7 - HĐ 09 (CGI)',
-                    detail: 'Payment: 1 đợt - 100%. ⏳ 03/10: Đã hoàn thành hồ sơ. Chờ thanh toán.',
+                    detail: 'Payment: 1 đợt - 100%. ⏳ 03/10: Đã hoàn thành hồ sơ. Đến hạn đợt 1 chưa thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
                 {
                     name: 'LEGACY NEXUS (CGI)',
-                    detail: 'Payment: 3 đợt (Đ1-40%, Đ2-30% NT 60%, Đ3-30%). ⏳ Đã đến hạn thanh toán Đ1. Growth hoàn thành hồ sơ, chờ thanh toán.',
+                    detail: 'Payment: 3 đợt (Đ1-40%, Đ2-30% NT 60%, Đ3-30%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
                 {
                     name: 'LEGACY HILL (CGI + Animation)',
-                    detail: 'Payment: 3 đợt (Đ1-40% NT cam & tone mood, Đ2-30% NT hình hoàn thiện, Đ3-30%). ⏳ 20/09: Đã đủ điều kiện thanh toán Đ1. Growth hoàn thành hồ sơ, chờ thanh toán.',
+                    detail: 'Payment: 3 đợt (Đ1-40% NT cam & tone mood, Đ2-30% NT hình hoàn thiện, Đ3-30%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
                 {
                     name: 'FOREST RETREAT PK8 - HĐ 08 (CGI)',
-                    detail: 'Payment: 2 đợt (Đ1-50%, Đ2-50%). ⏳ Đợt 1: Growth hoàn thành hồ sơ, chờ thanh toán.',
+                    detail: 'Payment: 2 đợt (Đ1-50%, Đ2-50%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
                 {
                     name: 'THE TEN II (CGI)',
-                    detail: 'Payment: 3 đợt (Đ1-30% gửi đề xuất góc cam, Đ2-30% NT nháp 2, Đ3-40%). ⏳ 02/10: Đủ điều kiện thanh toán Đ1. Growth follow up chase thanh toán.',
+                    detail: 'Payment: 3 đợt (Đ1-30% gửi đề xuất góc cam, Đ2-30% NT nháp 2, Đ3-40%). ⏳ 02/10: Đến hạn đợt 1 chưa thanh toán → Growth follow up chase thanh toán.',
                     statusClass: 'pay-status-ready'
                 },
                 {
                     name: 'SENTURIA NAM SÀI GÒN (CGI + VR360)',
-                    detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT nháp 1, Đ3-30%). ⏳ 30/09: KH ký HĐ bản cứng, đã xuất hoá đơn & gửi DNTT. Growth follow up chase thanh toán.',
+                    detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT nháp 1, Đ3-30%). ⏳ 30/09: KH ký HĐ bản cứng, đã xuất hoá đơn & gửi DNTT. Đến hạn đợt 1 chưa thanh toán.',
                     statusClass: 'pay-status-pending'
                 },
             ]
         },
         {
-            title: '📋 Chưa Triển Khai HĐ / Chưa Phát Sinh Thanh Toán',
+            title: '❌ Chưa Đủ Điều Kiện Thanh Toán',
+            color: 'var(--accent-rose)',
+            bg: 'rgba(244,63,94,0.08)',
+            items: [
+                {
+                    name: 'VŨ YÊN (4 hạng mục: CGI + 2 Animation + VR360)',
+                    detail: 'Payment: 4 đợt (Đ1-20%, Đ2-30% NT 40%, Đ3-30% NT 70%, Đ4-20%). ✅ Đã thanh toán Đ1. ❌ Chưa đủ điều kiện thanh toán đợt 2 (vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng).',
+                    statusClass: 'pay-status-pending'
+                },
+                {
+                    name: 'PHỐ NỐI (3 hạng mục: CGI + Animation + VR360)',
+                    detail: 'CGI: 3 đợt (Đ1-30%, Đ2-40% NT 60%, Đ3-30%). VR360: 3 đợt (Đ1-40%, Đ2-30% NT 70%, Đ3-30%). ✅ Đã thanh toán Đ1. ❌ Chưa đủ điều kiện thanh toán đợt 2 (tạm delay do CĐT điều chỉnh thiết kế).',
+                    statusClass: 'pay-status-pending'
+                },
+            ]
+        },
+        {
+            title: '📋 Dự Án Chưa Có Hợp Đồng',
             color: 'var(--text-muted)',
             bg: 'rgba(100,116,139,0.08)',
             items: [
                 {
                     name: 'CENTRAL PARK (CGI)',
-                    detail: 'Chưa triển khai HĐ. Dự án vừa kick-off 29/09.',
+                    detail: 'Dự án chưa có hợp đồng (vừa kick-off client 29/09, đang gửi proposal camera & tonemood).',
                     statusClass: 'pay-status-notstarted'
                 },
                 {
                     name: 'ECO PK5.1 - HĐ 11 (CGI + Animation)',
-                    detail: '05/10: PM cập nhật PASX cho Growth triển khai làm HĐ. Chưa triển khai HĐ.',
+                    detail: 'Dự án chưa có hợp đồng (05/10: PM cập nhật PASX cho Growth triển khai làm HĐ).',
                     statusClass: 'pay-status-notstarted'
                 },
                 {
                     name: 'ECO PK8.2 - HĐ 12 (CGI)',
-                    detail: 'Chưa triển khai HĐ. Dự án sắp triển khai.',
+                    detail: 'Dự án chưa có hợp đồng (đang check model, sắp triển khai).',
                     statusClass: 'pay-status-notstarted'
                 },
                 {
                     name: 'ĐẢO CHÂU ÂU - VINH (CGI)',
-                    detail: 'Tạm HĐ 11. Chưa triển khai HĐ riêng.',
+                    detail: 'Dự án chưa có hợp đồng (tạm thuộc HĐ 11, chưa lập HĐ riêng).',
                     statusClass: 'pay-status-notstarted'
                 },
             ]
