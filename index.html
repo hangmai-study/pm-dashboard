@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VistaX PMO Dashboard — Tuần 10/10/2026</title>
-<meta name="description" content="Báo cáo tổng quan dự án VistaX tuần 10/10/2026 - PM Weekly Report Dashboard">
+<title>VistaX PMO Executive Dashboard — Tuần 10/10/2026</title>
+<meta name="description" content="Hệ thống báo cáo điều hành PMO tuần 10/10/2026 - Cập nhật theo chỉ đạo Ban Giám Đốc">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -12,7 +12,7 @@
     --bg-secondary: #111827;
     --bg-card: #1a1f35;
     --bg-card-hover: #222842;
-    --border-subtle: rgba(255,255,255,0.06);
+    --border-subtle: rgba(255,255,255,0.08);
     --border-accent: rgba(99,102,241,0.3);
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
@@ -28,133 +28,77 @@
     --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
     --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
     --gradient-danger: linear-gradient(135deg, #ef4444 0%, #f43f5e 100%);
-    --gradient-info: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-    --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
-    --shadow-glow: 0 0 40px rgba(99,102,241,0.15);
-    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
-.dashboard-header { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%); border-bottom: 1px solid var(--border-accent); padding: 32px 40px; position: relative; overflow: hidden; }
-.dashboard-header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%); border-radius: 50%; }
-.header-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
-.header-title h1 { font-size: 28px; font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
-.header-title .subtitle { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
-.header-meta { text-align: right; color: var(--text-secondary); font-size: 13px; }
-.header-meta .date { font-size: 16px; font-weight: 600; color: var(--accent-cyan); }
-.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 24px 40px; }
-.kpi-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; }
-.kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); border-color: var(--border-accent); }
-.kpi-card .kpi-icon { font-size: 24px; margin-bottom: 12px; }
-.kpi-card .kpi-value { font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
-.kpi-card .kpi-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-.kpi-card .kpi-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
-.kpi-ontrack .kpi-value { color: var(--accent-emerald); } .kpi-ontrack .kpi-bar { background: var(--gradient-success); }
-.kpi-atrisk .kpi-value { color: var(--accent-amber); } .kpi-atrisk .kpi-bar { background: var(--gradient-warning); }
-.kpi-delayed .kpi-value { color: var(--accent-orange); } .kpi-delayed .kpi-bar { background: linear-gradient(135deg,#fb923c,#f97316); }
-.kpi-critical .kpi-value { color: var(--accent-rose); } .kpi-critical .kpi-bar { background: var(--gradient-danger); }
-.kpi-total .kpi-value { color: var(--accent-blue); } .kpi-total .kpi-bar { background: var(--gradient-info); }
-.section { padding: 8px 40px 24px; }
-.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); }
-.section-header .section-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-.section-header h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
-.section-header .section-badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-left: auto; }
-.alert-box { background: linear-gradient(135deg, rgba(239,68,68,0.08) 0%, rgba(244,63,94,0.05) 100%); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius-lg); padding: 24px; margin: 0 40px 24px; }
-.alert-box .alert-title { font-size: 15px; font-weight: 700; color: var(--accent-rose); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.alert-list { list-style: none; }
-.alert-list li { padding: 10px 16px; margin-bottom: 8px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.6; border-left: 3px solid var(--accent-rose); }
-.alert-list li:last-child { margin-bottom: 0; }
-.alert-list .proj-name { font-weight: 700; color: var(--accent-cyan); }
-.alert-list .issue-text { color: var(--text-secondary); }
-.insight-box { background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.05) 100%); border: 1px solid rgba(99,102,241,0.2); border-radius: var(--radius-lg); padding: 24px; margin: 0 40px 24px; }
-.insight-box .insight-title { font-size: 15px; font-weight: 700; color: var(--accent-blue); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.insight-list { list-style: none; }
-.insight-list li { padding: 10px 16px; margin-bottom: 8px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.6; border-left: 3px solid var(--accent-blue); }
-.pending-notice { background: rgba(100,116,139,0.08); border: 1px solid rgba(100,116,139,0.2); border-radius: var(--radius-md); padding: 14px 20px; margin-bottom: 16px; font-size: 13px; color: var(--text-secondary); }
-.pending-notice strong { color: var(--text-primary); }
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-.chart-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; }
-.chart-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 20px; color: var(--text-secondary); }
-.donut-container { display: flex; align-items: center; gap: 32px; }
-.donut-svg { width: 160px; height: 160px; flex-shrink: 0; }
-.donut-legend { display: flex; flex-direction: column; gap: 10px; }
-.legend-item { display: flex; align-items: center; gap: 10px; font-size: 13px; }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.legend-value { font-weight: 700; margin-left: auto; min-width: 24px; text-align: right; }
-.bar-chart { display: flex; flex-direction: column; gap: 14px; }
-.bar-item { display: flex; align-items: center; gap: 12px; }
-.bar-label { font-size: 13px; width: 100px; flex-shrink: 0; color: var(--text-secondary); }
-.bar-track { flex: 1; height: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; position: relative; }
-.bar-fill { height: 100%; border-radius: 12px; transition: width 1s ease; position: relative; }
-.bar-fill::after { content: attr(data-value); position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: white; }
-.project-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--bg-card); }
-.project-table { width: 100%; border-collapse: collapse; min-width: 1200px; }
-.project-table thead th { background: rgba(99,102,241,0.1); padding: 12px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); text-align: left; white-space: nowrap; position: sticky; top: 0; z-index: 2; }
-.project-table tbody tr { border-bottom: 1px solid var(--border-subtle); transition: background 0.2s; }
-.project-table tbody tr:hover { background: rgba(99,102,241,0.04); }
-.project-table td { padding: 12px 14px; font-size: 13px; vertical-align: top; line-height: 1.5; }
-.project-table td:first-child { text-align: center; font-weight: 600; color: var(--text-muted); width: 40px; }
-.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-.badge-ontrack { background: rgba(16,185,129,0.15); color: #34d399; }
-.badge-atrisk { background: rgba(245,158,11,0.15); color: #fbbf24; }
-.badge-delayed { background: rgba(251,146,60,0.15); color: #fb923c; }
-.badge-critical { background: rgba(239,68,68,0.15); color: #f87171; }
-.badge-na { background: rgba(100,116,139,0.15); color: #94a3b8; }
-.badge-cat { padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
-.badge-cgi { background: rgba(59,130,246,0.15); color: #60a5fa; }
-.badge-vr { background: rgba(168,85,247,0.15); color: #c084fc; }
-.badge-anim { background: rgba(236,72,153,0.15); color: #f472b6; }
-.payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 16px; }
-.payment-group { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
-.payment-group-header { padding: 14px 20px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border-subtle); }
-.payment-group-body { padding: 16px 20px; }
-.payment-item { padding: 10px 14px; margin-bottom: 8px; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.6; }
-.payment-item:last-child { margin-bottom: 0; }
-.payment-item .pay-proj { font-weight: 600; color: var(--accent-cyan); margin-bottom: 4px; }
-.payment-item .pay-detail { color: var(--text-secondary); font-size: 12px; }
-.pay-status-ready { border-left: 3px solid var(--accent-emerald); }
-.pay-status-pending { border-left: 3px solid var(--accent-amber); }
-.pay-status-blocked { border-left: 3px solid var(--accent-rose); }
-.pay-status-notstarted { border-left: 3px solid var(--text-muted); }
-.pm-workload-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-.pm-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; transition: all 0.3s; }
-.pm-card:hover { border-color: var(--border-accent); box-shadow: var(--shadow-glow); }
-.pm-card .pm-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-.pm-card .pm-count { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
-.pm-status-row { display: flex; gap: 8px; margin-bottom: 12px; }
-.pm-stat { flex: 1; text-align: center; padding: 8px 4px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.03); }
-.pm-stat .stat-num { font-size: 18px; font-weight: 800; }
-.pm-stat .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
-.pm-projects-list { font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
-.pm-projects-list span { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,0.04); border-radius: 4px; margin: 2px; }
-.risk-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--bg-card); }
-.risk-table { width: 100%; border-collapse: collapse; min-width: 900px; }
-.risk-table thead th { background: rgba(244,63,94,0.08); padding: 12px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); text-align: left; }
-.risk-table tbody tr { border-bottom: 1px solid var(--border-subtle); }
-.risk-table tbody tr:hover { background: rgba(244,63,94,0.03); }
-.risk-table td { padding: 12px 14px; font-size: 13px; vertical-align: top; line-height: 1.5; }
-.dashboard-footer { text-align: center; padding: 32px 40px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border-subtle); }
-.tab-nav { display: flex; gap: 4px; padding: 0 40px; margin-bottom: 4px; border-bottom: 1px solid var(--border-subtle); overflow-x: auto; }
-.tab-btn { padding: 12px 20px; font-size: 13px; font-weight: 600; color: var(--text-muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: inherit; }
+.dashboard-header { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%); border-bottom: 1px solid var(--border-accent); padding: 28px 40px; }
+.header-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.header-title h1 { font-size: 26px; font-weight: 800; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header-title .subtitle { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+.header-meta { text-align: right; color: var(--text-secondary); font-size: 12px; }
+.header-meta .date { font-size: 15px; font-weight: 700; color: var(--accent-cyan); }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; padding: 20px 40px; }
+.kpi-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px 20px; }
+.kpi-card .kpi-value { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+.kpi-card .kpi-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+.kpi-ontrack .kpi-value { color: var(--accent-emerald); }
+.kpi-atrisk .kpi-value { color: var(--accent-amber); }
+.kpi-delayed .kpi-value { color: var(--accent-orange); }
+.kpi-critical .kpi-value { color: var(--accent-rose); }
+.kpi-total .kpi-value { color: var(--accent-cyan); }
+
+.executive-summary { background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.25); border-radius: var(--radius-lg); padding: 20px 24px; margin: 0 40px 20px; }
+.summary-title { font-size: 14px; font-weight: 700; color: var(--accent-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; font-size: 13px; }
+.summary-item strong { color: var(--text-primary); }
+
+.tab-nav { display: flex; gap: 4px; padding: 0 40px; margin-bottom: 8px; border-bottom: 1px solid var(--border-subtle); overflow-x: auto; }
+.tab-btn { padding: 12px 18px; font-size: 13px; font-weight: 600; color: var(--text-muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: inherit; }
 .tab-btn:hover { color: var(--text-primary); }
-.tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
-.tab-content { display: none; }
+.tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); background: rgba(99,102,241,0.05); }
+
+.tab-content { display: none; padding: 12px 40px 32px; }
 .tab-content.active { display: block; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.animate-in { animation: fadeInUp 0.5s ease forwards; }
-@media (max-width: 768px) {
-    .dashboard-header, .section, .alert-box, .insight-box { padding-left: 16px; padding-right: 16px; }
-    .kpi-grid { padding: 16px; grid-template-columns: repeat(2, 1fr); }
-    .charts-grid { grid-template-columns: 1fr; }
-    .tab-nav { padding: 0 16px; }
-}
-.cr-badge { display: inline-flex; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; }
-.cr-yes { background: rgba(245,158,11,0.15); color: #fbbf24; }
-.cr-no { background: rgba(100,116,139,0.1); color: #64748b; }
-.issue-cat { display: inline-flex; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-.issue-client { background: rgba(245,158,11,0.12); color: #fbbf24; }
-.issue-quality { background: rgba(239,68,68,0.12); color: #f87171; }
-.issue-none { background: rgba(16,185,129,0.1); color: #34d399; }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.section-header h2 { font-size: 17px; font-weight: 700; }
+.section-badge { font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 12px; background: rgba(99,102,241,0.15); color: var(--accent-blue); }
+
+.data-table-wrap { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-card); }
+.data-table { width: 100%; border-collapse: collapse; min-width: 1000px; }
+.data-table thead th { background: rgba(99,102,241,0.08); padding: 12px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); text-align: left; }
+.data-table tbody tr { border-bottom: 1px solid var(--border-subtle); }
+.data-table tbody tr:hover { background: rgba(99,102,241,0.03); }
+.data-table td { padding: 12px 14px; font-size: 12.5px; vertical-align: top; line-height: 1.5; }
+
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.badge-critical { background: rgba(239,68,68,0.15); color: #f87171; }
+.badge-atrisk { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.badge-ontrack { background: rgba(16,185,129,0.15); color: #34d399; }
+.badge-delayed { background: rgba(251,146,60,0.15); color: #fb923c; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; }
+.risk-card { background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); padding: 18px 20px; }
+.risk-card.critical { border-left: 4px solid var(--accent-rose); }
+.risk-card.atrisk { border-left: 4px solid var(--accent-amber); }
+.risk-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.risk-card-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.risk-field { margin-bottom: 8px; font-size: 12.5px; }
+.risk-label { font-weight: 700; color: var(--text-secondary); }
+.risk-val { color: var(--text-primary); }
+
+.pay-group-box { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin-bottom: 16px; overflow: hidden; }
+.pay-group-head { padding: 12px 18px; font-size: 13px; font-weight: 700; display: flex; justify-content: space-between; }
+.pay-items-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.pay-items-table th { padding: 10px 14px; background: rgba(0,0,0,0.2); text-align: left; font-size: 11px; color: var(--text-secondary); }
+.pay-items-table td { padding: 10px 14px; border-top: 1px solid var(--border-subtle); }
+
+.policy-note { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.25); border-radius: var(--radius-sm); padding: 10px 16px; font-size: 12px; color: #fbbf24; margin-bottom: 16px; }
+.guardrail-box { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 11.5px; color: #fca5a5; margin-top: 6px; }
+
+.dashboard-footer { text-align: center; padding: 28px 40px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border-subtle); }
 </style>
 </head>
 <body>
@@ -162,112 +106,86 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-pri
 <header class="dashboard-header">
     <div class="header-top">
         <div class="header-title">
-            <h1>🏗️ VistaX — PMO Dashboard</h1>
-            <p class="subtitle">Báo Cáo Tổng Quan Dự Án Tuần | Project Management Office</p>
+            <h1>🏗️ VistaX — PMO Executive Dashboard</h1>
+            <p class="subtitle">Báo Cáo Tiến Độ & Quản Trị Rủi Ro Danh Mục | Tuần 10/10/2026 (Cập nhật theo chỉ đạo BOD)</p>
         </div>
         <div class="header-meta">
-            <div class="date">📅 Tuần 10/10/2026</div>
-            <div>Cập nhật: 10/10/2026</div>
-            <div>PM Department | VistaX JSC</div>
+            <div class="date">📅 Cập nhật: 12/10/2026</div>
+            <div>Báo cáo gửi Ban Giám Đốc (BOD)</div>
+            <div>Project Management Office | VistaX JSC</div>
         </div>
     </div>
 </header>
 
 <div class="kpi-grid">
-    <div class="kpi-card kpi-total animate-in">
-        <div class="kpi-icon">📊</div>
+    <div class="kpi-card kpi-total">
         <div class="kpi-value">27</div>
-        <div class="kpi-label">Tổng Hạng Mục</div>
-        <div class="kpi-bar"></div>
+        <div class="kpi-label">Tổng Hạng Mục (Portfolio)</div>
     </div>
-    <div class="kpi-card kpi-ontrack animate-in" style="animation-delay:0.1s">
-        <div class="kpi-icon">✅</div>
+    <div class="kpi-card kpi-ontrack">
         <div class="kpi-value">14</div>
-        <div class="kpi-label">On Track</div>
-        <div class="kpi-bar"></div>
+        <div class="kpi-label">On Track (52%)</div>
     </div>
-    <div class="kpi-card kpi-atrisk animate-in" style="animation-delay:0.2s">
-        <div class="kpi-icon">⚠️</div>
+    <div class="kpi-card kpi-atrisk">
         <div class="kpi-value">3</div>
-        <div class="kpi-label">At Risk</div>
-        <div class="kpi-bar"></div>
+        <div class="kpi-label">At Risk (11%)</div>
     </div>
-    <div class="kpi-card kpi-delayed animate-in" style="animation-delay:0.3s">
-        <div class="kpi-icon">🔶</div>
+    <div class="kpi-card kpi-critical">
+        <div class="kpi-value">3</div>
+        <div class="kpi-label">Critical (11%)</div>
+    </div>
+    <div class="kpi-card kpi-delayed">
         <div class="kpi-value">7</div>
-        <div class="kpi-label">Delayed / Pending</div>
-        <div class="kpi-bar"></div>
-    </div>
-    <div class="kpi-card kpi-critical animate-in" style="animation-delay:0.4s">
-        <div class="kpi-icon">🔴</div>
-        <div class="kpi-value">3</div>
-        <div class="kpi-label">Critical</div>
-        <div class="kpi-bar"></div>
+        <div class="kpi-label">Pending / Tạm dừng (26%)</div>
     </div>
 </div>
 
-<div class="alert-box">
-    <div class="alert-title">🚨 CEO ALERT — Dự Án Cần Chú Ý Ngay (Tuần 10/10/2026)</div>
-    <ul class="alert-list">
-        <li>
-            <span class="proj-name">🔴 VŨ YÊN (CGI & Animation):</span>
-            <span class="issue-text"> Vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng bàn giao. VistaX đề xuất họp trực tiếp 2 bên. Mục tiêu close Phase 1&2 trước 20/10.</span>
-        </li>
-        <li>
-            <span class="proj-name">⚠️ THE WIN CITY (Animation):</span>
-            <span class="issue-text"> Khách hàng không chuyên nghiệp trong việc feedback. Đã bàn giao film full 10/10, chốt lịch thu voice talent và edit trực tiếp tại studio thứ 4 tuần sau.</span>
-        </li>
-        <li>
-            <span class="proj-name">⚠️ ECO PK5.1 & ECO KV (CGI — HĐ 11):</span>
-            <span class="issue-text"> KH update model liên tục & tiến độ gấp → chuyển sang At Risk. PM cần theo dõi sát để đảm bảo timeline không bị trượt.</span>
-        </li>
-        <li>
-            <span class="proj-name">💤 7 DỰ ÁN TẠM PENDING (không báo cáo chi tiết tuần này):</span>
-            <span class="issue-text"> Phố Nối (CGI/Anim/VR360), Legacy Nexus, Legacy Hill (CGI/Anim), Đông Tăng Long. Các dự án này đang chờ phản hồi từ KH / tạm ngưng do nợ công. Không có cập nhật mới trong tuần.</span>
-        </li>
-    </ul>
-</div>
-
-<div class="insight-box">
-    <div class="insight-title">💡 NHẬN ĐỊNH PMO — Tình Hình Tổng Quan Tuần 10/10/2026</div>
-    <ul class="insight-list">
-        <li>
-            <strong>📌 Sắp xếp ưu tiên:</strong> Danh mục đã được sắp xếp lại: <strong>Critical 🔴 → At Risk ⚠️ → On Track 🟢 → Pending/Delayed 🔶</strong> giúp BOD tập trung xử lý rủi ro hàng đầu.
-        </li>
-        <li>
-            <strong>📌 Điểm tích cực tuần này:</strong> <span style="color:var(--accent-emerald)">🟢 Khai Sơn VR360</span> cải thiện từ Delayed → On Track (08/10 gửi VR nội thất cho KH review). <span style="color:var(--accent-emerald)">🟢 The Win City CGI</span> cải thiện từ At Risk → On Track (Draft 2 giao 07/10, đang chờ feedback).
-        </li>
-        <li>
-            <strong>📌 Cảnh báo rủi ro:</strong> <span style="color:var(--accent-amber)">⚠️ The Win City Animation</span> chuyển giai đoạn Pre Final nhưng vướng "Khách hàng không chuyên nghiệp trong việc feedback". <span style="color:var(--accent-amber)">⚠️ Eco PK5.1 CGI & Eco KV</span> ở trạng thái At Risk do KH update model liên tục.
-        </li>
-        <li>
-            <strong>📌 Vũ Yên (CGI & Anim):</strong> Cả 2 hạng mục đều Critical do vượt quá số lần chỉnh sửa. Cần chốt lịch họp trực tiếp 2 bên để dứt điểm trong T10.
-        </li>
-    </ul>
+<div class="executive-summary">
+    <div class="summary-title">⚡ TÓM TẮT ĐIỀU HÀNH GỬI BAN GIÁM ĐỐC (EXECUTIVE SUMMARY)</div>
+    <div class="summary-grid">
+        <div class="summary-item">
+            <strong>🔄 Biến động so với tuần trước (WoW):</strong><br>
+            • Khai Sơn VR360: Delayed ➔ On Track.<br>
+            • The Win City CGI: At Risk ➔ On Track.<br>
+            • Eco PK5.1 & Eco KV: Chuyển sang At Risk do biến động model CĐT.
+        </div>
+        <div class="summary-item">
+            <strong>🎯 Mốc Bàn giao / Nghiệm thu tuần 12–18/10:</strong><br>
+            • 14/10: Bàn giao OCP1.2 Final Phase 2.<br>
+            • 15/10: Họp thu voice & nghiệm thu The Win City Anim.<br>
+            • 17/10: Gửi đủ 10 căn bóc mái OCP1.2.
+        </div>
+        <div class="summary-item">
+            <strong>💰 Kế hoạch Dòng tiền Thu Tháng 10:</strong><br>
+            • Đủ điều kiện làm DNTT: The Ten II, Senturia, PK8, Eco HĐ09.<br>
+            • Đã gửi đủ hồ sơ chờ tiền về: Khai Sơn CGI Đ3, OCP1.2 Đ2.<br>
+            • Nợ xấu quá hạn cần xử lý: Đông Tăng Long Đ2 (>30 ngày).
+        </div>
+        <div class="summary-item">
+            <strong>🏛️ Quyết định cần BOD phê duyệt ngay:</strong><br>
+            1. Duyệt nhân sự cấp cao họp F2F với CĐT MIK (Vũ Yên).<br>
+            2. Xác nhận phê duyệt triển khai trước Central Park & Eco 5.1.<br>
+            3. Chỉ đạo Growth thu hồi nợ đợt 1 các DA đã đủ hồ sơ.
+        </div>
+    </div>
 </div>
 
 <nav class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('tab-overview', this)">📋 Tổng Quan Dự Án (Ưu tiên Risk)</button>
-    <button class="tab-btn" onclick="switchTab('tab-risk', this)">⚠️ Rủi Ro & Vấn Đề</button>
-    <button class="tab-btn" onclick="switchTab('tab-payment', this)">💰 Trạng Thái Thanh Toán</button>
-    <button class="tab-btn" onclick="switchTab('tab-pm', this)">👤 Phân Bổ PM</button>
-    <button class="tab-btn" onclick="switchTab('tab-charts', this)">📊 Biểu Đồ</button>
+    <button class="tab-btn active" onclick="switchTab('tab-active', this)">📋 1. Bảng Tiến Độ Active (20 DA)</button>
+    <button class="tab-btn" onclick="switchTab('tab-critical-plan', this)">🚨 2. Xử Lý 3 Critical & 3 At Risk</button>
+    <button class="tab-btn" onclick="switchTab('tab-cashflow', this)">💰 3. Kế Hoạch Thu Tiền T10</button>
+    <button class="tab-btn" onclick="switchTab('tab-uncontracted', this)">📑 4. Kiểm Soát DA Chưa HĐ</button>
+    <button class="tab-btn" onclick="switchTab('tab-pending', this)">💤 5. Danh Mục Tạm Dừng (7 DA)</button>
 </nav>
 
-<div id="tab-overview" class="tab-content active">
-<div class="section">
+<!-- TAB 1: ACTIVE PROJECTS -->
+<div id="tab-active" class="tab-content active">
     <div class="section-header">
-        <div class="section-icon" style="background:rgba(99,102,241,0.15)">📋</div>
-        <h2>Bảng Tổng Quan Dự Án Đang Triển Khai (Critical 🔴 → At Risk ⚠️ → On Track 🟢 → Delayed 🔶)</h2>
-        <span class="section-badge" style="background:rgba(99,102,241,0.15);color:var(--accent-blue)">20 hạng mục đang báo cáo</span>
+        <h2>Bảng Theo Dõi Tiến Độ Danh Mục Đang Triển Khai (Active)</h2>
+        <span class="section-badge">20 hạng mục vận hành thực tế</span>
     </div>
-    <div class="pending-notice">
-        💤 <strong>7 hạng mục tạm pending không đưa vào báo cáo chi tiết tuần này:</strong>
-        Phố Nối (3 hạng mục), Legacy Hill (2 hạng mục), Legacy Nexus (1 hạng mục), Đông Tăng Long (1 hạng mục).
-        Các dự án này vẫn được tính trong KPI tổng và theo dõi trong tab Thanh Toán.
-    </div>
-    <div class="project-table-wrap">
-        <table class="project-table" id="projectTable">
+    <div class="data-table-wrap">
+        <table class="data-table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -279,332 +197,718 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-pri
                     <th>Deadline</th>
                     <th>Status</th>
                     <th>Tiến Độ</th>
-                    <th>Vấn Đề</th>
+                    <th>Vấn Đề / Rủi Ro</th>
                     <th>Hướng Xử Lý PMO</th>
                 </tr>
             </thead>
-            <tbody id="projectTableBody"></tbody>
+            <tbody>
+<tr>
+        <td>1</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">VŨ YÊN</td>
+        <td>CGI</td>
+        <td>44 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>30/10/2026</td>
+        <td><span class="badge badge-critical">Critical</span></td>
+        <td>Pre Final</td>
+        <td>Vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng bàn giao</td>
+        <td>Họp F2F chốt dứt điểm Phase 1 & 2 trước 20/10; Phase 3 kiểm soát qua QC Gateway</td>
+    </tr><tr>
+        <td>2</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">VŨ YÊN</td>
+        <td>Animation</td>
+        <td>Phase 1: 8 shot</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>30/10/2026</td>
+        <td><span class="badge badge-critical">Critical</span></td>
+        <td>Final</td>
+        <td>Vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng bàn giao</td>
+        <td>Cố vấn kỹ thuật can thiệp trực tiếp 2 shot đêm, gửi frame check 12/10, chốt trong T10</td>
+    </tr><tr>
+        <td>3</td>
+        <td><strong>THẮNG LỢI GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">THE WIN CITY</td>
+        <td>Animation</td>
+        <td>Full phim (3 Phút)</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>17/10/2026</td>
+        <td><span class="badge badge-atrisk">At Risk</span></td>
+        <td>Pre Final</td>
+        <td>Khách hàng không chuyên nghiệp trong việc feedback</td>
+        <td>Làm việc trực tiếp tại Studio thu voice Thứ 4 (15/10), ký nghiệm thu tại bàn</td>
+    </tr><tr>
+        <td>4</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Eco PK5.1 - HĐ 11</td>
+        <td>CGI</td>
+        <td>19 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>20/10/2026</td>
+        <td><span class="badge badge-atrisk">At Risk</span></td>
+        <td>Camera Lock</td>
+        <td>KH update model liên tục & tiến độ gấp (Chưa có HĐ)</td>
+        <td>Khóa thiết kế (Model Freeze) ngày 13/10; BOD đã phê duyệt triển khai trước; đẩy nhanh ký HĐ 11</td>
+    </tr><tr>
+        <td>5</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Eco KV - HĐ 11</td>
+        <td>CGI</td>
+        <td>3 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>30/11/2026</td>
+        <td><span class="badge badge-atrisk">At Risk</span></td>
+        <td>Draft 1</td>
+        <td>KH update model liên tục & tiến độ gấp (Chưa có HĐ)</td>
+        <td>Tập trung 2 view KV đã cố định kiến trúc; đi chung phê duyệt HĐ 11</td>
+    </tr><tr>
+        <td>6</td>
+        <td><strong>BICAMEX TOKYU</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">The Ten II</td>
+        <td>CGI</td>
+        <td>12 view</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>07/11/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Modeling</td>
+        <td>Không có</td>
+        <td>Lấy confirm camera proposal trong ngày 12/10, lập timeline mới theo sát CĐT</td>
+    </tr><tr>
+        <td>7</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Đảo Châu Âu - Vinh</td>
+        <td>CGI</td>
+        <td>1 Birdview (update)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>30/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Modeling</td>
+        <td>Không có</td>
+        <td>Đã bàn giao sản phẩm, chờ KH xác nhận nghiệm thu; gộp phụ lục Ecopark</td>
+    </tr><tr>
+        <td>8</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Eco PK5.1 - HĐ 11</td>
+        <td>Animation</td>
+        <td>8-10 shot phim</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>Cập nhật sau</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Chưa triển khai</td>
+        <td>Không có</td>
+        <td>Làm việc chi tiết brief/timeline; giới hạn không sản xuất trước khi ký HĐ</td>
+    </tr><tr>
+        <td>9</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Eco PK8.2 - HĐ 12</td>
+        <td>CGI</td>
+        <td>(Chờ thêm thông tin)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>Cập nhật sau</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Chưa triển khai</td>
+        <td>Không có</td>
+        <td>Giữ nguyên chưa triển khai; nhận đề bài và chỉ làm việc sau khi hoàn thành HĐ 11</td>
+    </tr><tr>
+        <td>10</td>
+        <td><strong>GAMUDA LAND</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">CENTRAL PARK</td>
+        <td>CGI</td>
+        <td>12 View</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>30/11/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Modeling</td>
+        <td>Chưa có HĐ (BOD đã phê duyệt triển khai trước)</td>
+        <td>Lock 10/12 camera; giới hạn chỉ làm Model & Cam, không render Draft trước khi ký HĐ</td>
+    </tr><tr>
+        <td>11</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">KHAI SƠN</td>
+        <td>Animation</td>
+        <td>Full Phim - 3 Phút</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>20/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Final (DONE)</td>
+        <td>Không có</td>
+        <td>Đã bàn giao đầy đủ teaser & phim full subtitled; push nghiệm thu close task</td>
+    </tr><tr>
+        <td>12</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">KHAI SƠN</td>
+        <td>CGI</td>
+        <td>33 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>12/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Pre Final</td>
+        <td>Phát sinh chi phí dựng model nội thất</td>
+        <td>NT 23 hình chính, chỉnh sửa 6 hình còn lại, mục tiêu close dự án tuần này</td>
+    </tr><tr>
+        <td>13</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">KHAI SƠN</td>
+        <td>VR 360</td>
+        <td>35 hình</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>20/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Draft 1</td>
+        <td>Không có</td>
+        <td>08/10 gửi link VR nội thất CĐT review; push tiếp VR ngoại thất, close trước 20/10</td>
+    </tr><tr>
+        <td>14</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">OCP1.2</td>
+        <td>CGI</td>
+        <td>55 Hình</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>31/12/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Pre Final</td>
+        <td>KH cập nhật thiết kế trong phạm vi support</td>
+        <td>NT xong 12 view P1; 14/10 gửi final P2 (7 view); 14-17/10 gửi đủ 10 căn bóc mái P4</td>
+    </tr><tr>
+        <td>15</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">VŨ YÊN</td>
+        <td>VR 360</td>
+        <td>20 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>30/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Draft 2</td>
+        <td>Không có</td>
+        <td>08/10 gửi 1 view VR tổng thể chờ confirm; đang xử lý feedback UX/UI round 5</td>
+    </tr><tr>
+        <td>16</td>
+        <td><strong>THẮNG LỢI GROUP</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">THE WIN CITY</td>
+        <td>CGI</td>
+        <td>13 view</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>15/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Draft 2</td>
+        <td>Không có</td>
+        <td>NT 9 view GĐ1; Draft 2 giao ngày 07/10 đang chờ feedback; close trong tuần</td>
+    </tr><tr>
+        <td>17</td>
+        <td><strong>TIẾN PHƯỚC</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">SENTURIA NAM SÀI GÒN</td>
+        <td>CGI</td>
+        <td>18 View</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>09/11/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Cam Proposal</td>
+        <td>Không có</td>
+        <td>10/10 gửi cam proposal, deadline confirm 13/10; theo sát góc máy</td>
+    </tr><tr>
+        <td>18</td>
+        <td><strong>TIẾN PHƯỚC</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">SENTURIA NAM SÀI GÒN</td>
+        <td>VR 360</td>
+        <td>11 view</td>
+        <td><strong>Kiều Như</strong></td>
+        <td>04/12/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>UX/UI Design</td>
+        <td>Không có</td>
+        <td>06/10 present CĐT, chờ input flow trải nghiệm; PM chuẩn bị lấy ý kiến chi tiết</td>
+    </tr><tr>
+        <td>19</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Forest Retreat PK8 - HĐ 08</td>
+        <td>CGI</td>
+        <td>Phase 1: 7 view + P2: 5 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>30/10/2026</td>
+        <td><span class="badge badge-ontrack">On Track</span></td>
+        <td>Draft 1</td>
+        <td>Không có</td>
+        <td>30/09 bàn giao NT Phase 1; Phase 2 chờ KH confirm cmt; ưu tiên nhân lực cho PK5.1</td>
+    </tr><tr>
+        <td>20</td>
+        <td><strong>ECO PARK</strong></td>
+        <td style="color:var(--accent-cyan);font-weight:600">Eco PK5 + PK7 - HĐ 09</td>
+        <td>CGI</td>
+        <td>31 view</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>Cập nhật sau</td>
+        <td><span class="badge badge-delayed">Delayed</span></td>
+        <td>Pending</td>
+        <td>KH tạm pending, tập trung khu 5.1 (dự kiến quay lại cuối T10/đầu T11)</td>
+        <td>Đã NT 23 hình; 8 hình phát sinh đã gửi Draft 2. Không sản xuất thêm, chờ CĐT tái khởi động</td>
+    </tr>
+            </tbody>
         </table>
     </div>
 </div>
+
+<!-- TAB 2: CRITICAL & AT RISK ACTION PLAN -->
+<div id="tab-critical-plan" class="tab-content">
+    <div class="section-header">
+        <h2>Kế Hoạch Xử Lý Chi Tiết 3 Hạng Mục Critical & 3 Hạng Mục At Risk (Mục 2 BOD)</h2>
+        <span class="section-badge">6 hạng mục trọng điểm</span>
+    </div>
+    <div class="card-grid">
+        <!-- VŨ YÊN CGI -->
+        <div class="risk-card critical">
+            <div class="risk-card-header">
+                <div class="risk-card-title">🔴 MIK GROUP — VŨ YÊN (CGI 44 view)</div>
+                <span class="badge badge-critical">Critical</span>
+            </div>
+            <div class="risk-field"><span class="risk-label">Vấn đề & Nguyên nhân:</span> <span class="risk-val">Vượt quá số lần chỉnh sửa cam kết. CĐT chưa hài lòng chất lượng giai đoạn Final (Phase 1 còn 2 view; Phase 2 đã gửi Final-3 + phương án Cố vấn kỹ thuật vẫn chưa chốt).</span></div>
+            <div class="risk-field"><span class="risk-label">Ảnh hưởng:</span> <span class="risk-val">Chậm bàn giao tổng thể sang cuối T10; vướng chưa đủ điều kiện thanh toán Đợt 2 (30%); phát sinh chi phí nhân sự hậu kỳ ~25%.</span></div>
+            <div class="risk-field"><span class="risk-label">Phương án PMO đề xuất:</span> <span class="risk-val">Nghiệm thu dứt điểm 12 hình đã đạt. Họp trực tiếp (F2F) với Ban MKT CĐT trước 16/10 chốt mood các hình còn lại. Phase 3 (3 hình) kiểm soát chặt qua QC Gateway.</span></div>
+            <div class="risk-field"><span class="risk-label">Người chịu trách nhiệm:</span> <span class="risk-val"><strong>PM Quyên Lê</strong> (Điều phối) + <strong>Cố vấn kỹ thuật</strong> (Chất lượng)</span></div>
+            <div class="risk-field"><span class="risk-label">Hạn xử lý dứt điểm:</span> <span class="risk-val" style="color:var(--accent-rose);font-weight:700">20/10/2026 (Close Phase 1 & 2)</span></div>
+            <div class="risk-field"><span class="risk-label">Quyết định cần BOD:</span> <span class="risk-val">BOD duyệt cử Giám đốc Sáng tạo/Cố vấn kỹ thuật cùng Growth tham gia họp F2F với CĐT MIK tuần này.</span></div>
+        </div>
+
+        <!-- VŨ YÊN ANIMATION -->
+        <div class="risk-card critical">
+            <div class="risk-card-header">
+                <div class="risk-card-title">🔴 MIK GROUP — VŨ YÊN (Animation Phase 1: 8 shot)</div>
+                <span class="badge badge-critical">Critical</span>
+            </div>
+            <div class="risk-field"><span class="risk-label">Vấn đề & Nguyên nhân:</span> <span class="risk-val">Chất lượng sản phẩm đối tác outsource chưa đạt kỳ vọng CĐT (đặc biệt 02 shot đêm), sửa nhiều lần chưa đạt mood.</span></div>
+            <div class="risk-field"><span class="risk-label">Ảnh hưởng:</span> <span class="risk-val">Chậm hoàn thành phim; chưa thể nghiệm thu làm thủ tục thanh toán; nguy cơ phạt tiến độ outsource.</span></div>
+            <div class="risk-field"><span class="risk-label">Phương án PMO đề xuất:</span> <span class="risk-val">Cố vấn kỹ thuật can thiệp trực tiếp hậu kỳ internal, gửi lại frame check ngày 12/10 để khách chốt trước khi render full.</span></div>
+            <div class="risk-field"><span class="risk-label">Người chịu trách nhiệm:</span> <span class="risk-val"><strong>Cố vấn kỹ thuật</strong> + <strong>PM Quyên Lê</strong></span></div>
+            <div class="risk-field"><span class="risk-label">Hạn xử lý dứt điểm:</span> <span class="risk-val" style="color:var(--accent-rose);font-weight:700">15/10 (Chốt frame check) ➔ 25/10/2026 (Bàn giao final)</span></div>
+            <div class="risk-field"><span class="risk-label">Quyết định cần BOD:</span> <span class="risk-val">Cho phép điều động artist in-house thay thế nếu Outsource tiếp tục không đạt sau ngày 13/10.</span></div>
+        </div>
+
+        <!-- ĐÔNG TĂNG LONG -->
+        <div class="risk-card critical">
+            <div class="risk-card-header">
+                <div class="risk-card-title">🔴 GIDEV — ĐÔNG TĂNG LONG (CGI 23 view)</div>
+                <span class="badge badge-critical">Critical</span>
+            </div>
+            <div class="risk-field"><span class="risk-label">Vấn đề & Nguyên nhân:</span> <span class="risk-val">CĐT nợ tiền Đợt 2 quá hạn >30 ngày (xuất hóa đơn từ 14/08) và chậm phản hồi nghiệm thu 7 hình còn lại.</span></div>
+            <div class="risk-field"><span class="risk-label">Ảnh hưởng:</span> <span class="risk-val">Đọng vốn, rủi ro nợ khó đòi; công việc CGI còn dở dang 7 hình.</span></div>
+            <div class="risk-field"><span class="risk-label">Phương án PMO đề xuất:</span> <span class="risk-val">TIẾP TỤC TẠM NGƯNG TRIỂN KHAI theo công văn đã gửi. Không bàn giao sản phẩm hoàn thiện khi chưa nhận được Đợt 2.</span></div>
+            <div class="risk-field"><span class="risk-label">Người chịu trách nhiệm:</span> <span class="risk-val"><strong>PM Quyên Lê</strong> (Hồ sơ) + <strong>Phòng Growth</strong> (Thu nợ)</span></div>
+            <div class="risk-field"><span class="risk-label">Hạn xử lý:</span> <span class="risk-val" style="color:var(--accent-rose);font-weight:700">20/10/2026 (Rà soát phản hồi)</span></div>
+            <div class="risk-field"><span class="risk-label">Quyết định cần BOD:</span> <span class="risk-val">BOD phê duyệt phương án gửi thông báo chấm dứt HĐ nếu CĐT không phản hồi trước 25/10/2026.</span></div>
+        </div>
+
+        <!-- THE WIN CITY ANIM -->
+        <div class="risk-card atrisk">
+            <div class="risk-card-header">
+                <div class="risk-card-title">⚠️ THẮNG LỢI — THE WIN CITY (Animation 3 Phút)</div>
+                <span class="badge badge-atrisk">At Risk</span>
+            </div>
+            <div class="risk-field"><span class="risk-label">Vấn đề & Nguyên nhân:</span> <span class="risk-val">CĐT không chuyên nghiệp trong việc feedback, phản hồi chung chung và hay thay đổi kịch bản giai đoạn Pre-Final.</span></div>
+            <div class="risk-field"><span class="risk-label">Ảnh hưởng:</span> <span class="risk-val">Kéo dài vòng lặp chỉnh sửa, ảnh hưởng lịch voice talent, chậm nghiệm thu kích hoạt Đợt 2.</span></div>
+            <div class="risk-field"><span class="risk-label">Phương án PMO đề xuất:</span> <span class="risk-val">Đã gửi film full 10/10 làm mốc cơ sở. Làm việc trực tiếp tại Studio thu voice Thứ 4 (15/10), chỉnh sửa và ký nghiệm thu tại chỗ.</span></div>
+            <div class="risk-field"><span class="risk-label">Người chịu trách nhiệm:</span> <span class="risk-val"><strong>PM Kiều Như</strong></span></div>
+            <div class="risk-field"><span class="risk-label">Hạn xử lý dứt điểm:</span> <span class="risk-val" style="color:var(--accent-amber);font-weight:700">17/10/2026 (Ký nghiệm thu)</span></div>
+            <div class="risk-field"><span class="risk-label">Quyết định cần BOD:</span> <span class="risk-val">Không có (PM và Delivery chủ động điều phối).</span></div>
+        </div>
+
+        <!-- ECO PK5.1 CGI -->
+        <div class="risk-card atrisk">
+            <div class="risk-card-header">
+                <div class="risk-card-title">⚠️ ECOPARK — ECO PK5.1 (CGI 19 view - HĐ 11)</div>
+                <span class="badge badge-atrisk">At Risk</span>
+            </div>
+            <div class="risk-field"><span class="risk-label">Vấn đề & Nguyên nhân:</span> <span class="risk-val">CĐT liên tục update model 3D kiến trúc trong khi ép tiến độ rất gấp. Dự án chưa có HĐ chính thức.</span></div>
+            <div class="risk-field"><span class="risk-label">Ảnh hưởng:</span> <span class="risk-val">Lãng phí nhân lực dựng model cũ, nguy cơ trượt timeline hoàn thành trong tháng 11.</span></div>
+            <div class="risk-field"><span class="risk-label">Phương án PMO đề xuất:</span> <span class="risk-val">Thiết lập mốc khóa thiết kế (Model Freeze) ngày 13/10; sau ngày này mọi thay đổi tính Change Request. BOD đã phê duyệt triển khai trước.</span></div>
+            <div class="risk-field"><span class="risk-label">Người chịu trách nhiệm:</span> <span class="risk-val"><strong>PM Quyên Lê</strong> + <strong>Growth</strong> (Thúc đẩy HĐ)</span></div>
+            <div class="risk-field"><span class="risk-label">Hạn xử lý dứt điểm:</span> <span class="risk-val" style="color:var(--accent-amber);font-weight:700">14/10/2026 (Khóa model) ➔ 20/10 (Ký HĐ)</span></div>
+            <div class="risk-field"><span class="risk-label">Quyết định cần BOD:</span> <span class="risk-val">Đã có chỉ thị từ BOD. Cần Growth đẩy nhanh thủ tục ký HĐ trước khi render Draft 1.</span></div>
+        </div>
+
+        <!-- ECO KV CGI -->
+        <div class="risk-card atrisk">
+            <div class="risk-card-header">
+                <div class="risk-card-title">⚠️ ECOPARK — ECO KV (CGI 3 view - HĐ 11)</div>
+                <span class="badge badge-atrisk">At Risk</span>
+            </div>
+            <div class="risk-field"><span class="risk-label">Vấn đề & Nguyên nhân:</span> <span class="risk-val">Chịu ảnh hưởng trực tiếp từ việc thay đổi model khu 5.1; tiến độ gấp. Chưa có HĐ riêng.</span></div>
+            <div class="risk-field"><span class="risk-label">Ảnh hưởng:</span> <span class="risk-val">Nguy cơ chậm bàn giao các view Key Visual cho CĐT mở bán.</span></div>
+            <div class="risk-field"><span class="risk-label">Phương án PMO đề xuất:</span> <span class="risk-val">Tập trung dựng trước 2 view KV đã cố định kiến trúc; quản lý feedback qua format chuẩn hóa.</span></div>
+            <div class="risk-field"><span class="risk-label">Người chịu trách nhiệm:</span> <span class="risk-val"><strong>PM Quyên Lê</strong></span></div>
+            <div class="risk-field"><span class="risk-label">Hạn xử lý dứt điểm:</span> <span class="risk-val" style="color:var(--accent-amber);font-weight:700">18/10/2026 (Bàn giao Draft 1)</span></div>
+            <div class="risk-field"><span class="risk-label">Quyết định cần BOD:</span> <span class="risk-val">Đã có chỉ thị từ BOD. Đi chung tiến độ HĐ 11 với phân khu 5.1.</span></div>
+        </div>
+    </div>
 </div>
 
-<div id="tab-risk" class="tab-content">
-<div class="section">
+<!-- TAB 3: CASHFLOW PLAN -->
+<div id="tab-cashflow" class="tab-content">
     <div class="section-header">
-        <div class="section-icon" style="background:rgba(244,63,94,0.15)">⚠️</div>
-        <h2>Phân Tích Rủi Ro & Vấn Đề Chi Tiết</h2>
-        <span class="section-badge" style="background:rgba(244,63,94,0.15);color:var(--accent-rose)">Dự án đang triển khai có vấn đề</span>
+        <h2>Kế Hoạch Thu Tiền & Quản Trị Công Nợ Tháng 10 (Mục 3 BOD)</h2>
+        <span class="section-badge">Phân loại 4 nhóm chuẩn dòng tiền</span>
     </div>
-    <div class="risk-table-wrap">
-        <table class="risk-table" id="riskTable">
+
+    <div class="policy-note">
+        🔒 <strong>NGUYÊN TẮC PHÂN QUYỀN & BẢO MẬT:</strong> Theo quy định tài chính của công ty, đội ngũ PMO không nắm giá trị hợp đồng bằng tiền mặt (VNĐ). PMO chịu trách nhiệm xác nhận <strong>Điều kiện kỹ thuật/nghiệm thu</strong> và <strong>Tình trạng hoàn thiện hồ sơ bàn giao</strong>. Giá trị tiền mặt và thu hồi công nợ thực tế do <strong>Phòng Growth và Kế toán</strong> đối soát trực tiếp cùng BOD.
+    </div>
+
+    <!-- NHÓM 1: ĐỦ ĐIỀU KIỆN LÀM DNTT -->
+    <div class="pay-group-box">
+        <div class="pay-group-head" style="background:rgba(16,185,129,0.12);color:var(--accent-emerald)">
+            <span>1. KHOẢN ĐỦ ĐIỀU KIỆN LÀM ĐỀ NGHỊ THANH TOÁN (DNTT) — PMO đã hoàn tất mốc kỹ thuật</span>
+            <span>6 dự án</span>
+        </div>
+        <table class="pay-items-table">
+            <thead>
+                <tr>
+                    <th>Dự án & Hạng mục</th>
+                    <th>Điều kiện TT theo HĐ</th>
+                    <th>Tình trạng hồ sơ (PMO)</th>
+                    <th>Hạn TT theo HĐ</th>
+                    <th>Ngày KH hẹn trả</th>
+                    <th>Người phụ trách tiếp theo</th>
+                    <th>Giá trị tiền (VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SENTURIA NAM SÀI GÒN (Đợt 1)</strong></td>
+                    <td>Ký HĐ bản cứng</td>
+                    <td>✅ Đã ký HĐ, đã xuất HĐ & gửi DNTT</td>
+                    <td>30/09/2026</td>
+                    <td><strong>12/10/2026</strong> <em>(Đang chờ kết quả làm việc)</em></td>
+                    <td>Growth (Thu nợ)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>THE TEN II (Đợt 1 - 30%)</strong></td>
+                    <td>Gửi đề xuất góc cam</td>
+                    <td>✅ Đủ điều kiện từ 02/10, hồ sơ đã xong</td>
+                    <td>02/10/2026</td>
+                    <td>Đang theo dõi</td>
+                    <td>Growth (Chase nợ)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>FOREST RETREAT PK8 (Đợt 1 - 50%)</strong></td>
+                    <td>Ký HĐ</td>
+                    <td>✅ Growth đã hoàn thành hồ sơ</td>
+                    <td>30/09/2026</td>
+                    <td>Đang theo dõi</td>
+                    <td>Growth (Chase nợ)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>ECO PK5+PK7 HĐ09 (Đợt 1 - 100%)</strong></td>
+                    <td>Ký HĐ & Giao bài</td>
+                    <td>✅ Hồ sơ biên nhận xong (DA tạm pending)</td>
+                    <td>30/09/2026</td>
+                    <td>Cuối T10 / Đầu T11</td>
+                    <td>Growth (Theo dõi)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>LEGACY NEXUS (Đợt 1 - 40%)</strong></td>
+                    <td>Ký HĐ</td>
+                    <td>✅ Đã có hồ sơ (DA tạm pending)</td>
+                    <td>30/09/2026</td>
+                    <td>Đang theo dõi</td>
+                    <td>Growth (Thu nợ)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>LEGACY HILL (Đợt 1 - 40%)</strong></td>
+                    <td>Ký HĐ & Duyệt Cam</td>
+                    <td>✅ Đã có hồ sơ (DA tạm pending)</td>
+                    <td>30/09/2026</td>
+                    <td>Đang theo dõi</td>
+                    <td>Growth (Thu nợ)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NHÓM 2: ĐÃ GỬI ĐỦ HỒ SƠ -->
+    <div class="pay-group-box">
+        <div class="pay-group-head" style="background:rgba(99,102,241,0.12);color:var(--accent-blue)">
+            <span>2. KHOẢN ĐÃ GỬI ĐỦ HỒ SƠ — Đang chờ KH duyệt chi / chờ tiền về tài khoản</span>
+            <span>2 dự án</span>
+        </div>
+        <table class="pay-items-table">
+            <thead>
+                <tr>
+                    <th>Dự án & Hạng mục</th>
+                    <th>Điều kiện TT theo HĐ</th>
+                    <th>Tình trạng hồ sơ (PMO)</th>
+                    <th>Hạn TT theo HĐ</th>
+                    <th>Ngày KH hẹn trả</th>
+                    <th>Người phụ trách tiếp theo</th>
+                    <th>Giá trị tiền (VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>KHAI SƠN CGI (Đợt 3 - 30%)</strong></td>
+                    <td>Nghiệm thu 70% sản lượng</td>
+                    <td>✅ Đã nghiệm thu đạt mốc, Growth đã gửi HS</td>
+                    <td>10/10/2026</td>
+                    <td><strong>Trước 20/10/2026</strong></td>
+                    <td>Growth + Kế toán</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>OCP1.2 CGI (Đợt 2 - 40%)</strong></td>
+                    <td>Nghiệm thu 60% sản lượng</td>
+                    <td>⏳ Growth cập nhật phụ lục chờ ký bản cứng</td>
+                    <td>10/10/2026</td>
+                    <td><strong>Trước 20/10/2026</strong></td>
+                    <td>Growth (Lấy chữ ký)</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NHÓM 3: ĐẾN HẠN TRONG THÁNG 10 -->
+    <div class="pay-group-box">
+        <div class="pay-group-head" style="background:rgba(245,158,11,0.12);color:var(--accent-amber)">
+            <span>3. KHOẢN ĐẾN HẠN TRONG THÁNG 10 — Cần đẩy nhanh hoàn thiện sản phẩm để kích hoạt hồ sơ</span>
+            <span>1 dự án</span>
+        </div>
+        <table class="pay-items-table">
+            <thead>
+                <tr>
+                    <th>Dự án & Hạng mục</th>
+                    <th>Điều kiện TT theo HĐ</th>
+                    <th>Tình trạng hồ sơ (PMO)</th>
+                    <th>Hạn TT theo HĐ</th>
+                    <th>Ngày KH hẹn trả</th>
+                    <th>Người phụ trách tiếp theo</th>
+                    <th>Giá trị tiền (VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>THE WIN CITY (Đợt 2 - 40%)</strong></td>
+                    <td>Nghiệm thu hình nháp + phim nháp</td>
+                    <td>⏳ Chờ nghiệm thu phim tại Studio ngày 15/10</td>
+                    <td>18/10/2026</td>
+                    <td><strong>Trước 25/10/2026</strong></td>
+                    <td>PM Kiều Như (NT) + Growth</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- NHÓM 4: QUÁ HẠN -->
+    <div class="pay-group-box">
+        <div class="pay-group-head" style="background:rgba(239,68,68,0.12);color:var(--accent-rose)">
+            <span>4. KHOẢN QUÁ HẠN (RỦI RO NỢ KHÓ ĐÒI) — Cần chế tài xử lý cấp cao</span>
+            <span>1 dự án</span>
+        </div>
+        <table class="pay-items-table">
+            <thead>
+                <tr>
+                    <th>Dự án & Hạng mục</th>
+                    <th>Điều kiện TT theo HĐ</th>
+                    <th>Tình trạng hồ sơ (PMO)</th>
+                    <th>Hạn TT theo HĐ</th>
+                    <th>Ngày KH hẹn trả</th>
+                    <th>Người phụ trách tiếp theo</th>
+                    <th>Giá trị tiền (VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ĐÔNG TĂNG LONG (Đợt 2 - 20%)</strong></td>
+                    <td>Xuất hóa đơn từ 14/08/2026</td>
+                    <td>⚠️ Đã gửi công văn ngưng DA, nợ quá hạn >30 ngày</td>
+                    <td>14/08/2026</td>
+                    <td><strong>Chưa có ngày hẹn</strong></td>
+                    <td>BOD + Growth</td>
+                    <td><em style="color:var(--text-muted)">[Growth & Kế toán quản lý]</em></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- TAB 4: UNCONTRACTED PROJECTS -->
+<div id="tab-uncontracted" class="tab-content">
+    <div class="section-header">
+        <h2>Kiểm Soát Dự Án Chưa Ký Hợp Đồng & Giới Hạn Rủi Ro (Mục 4 BOD)</h2>
+        <span class="section-badge">4 dự án cần giám sát nguồn lực</span>
+    </div>
+    <div class="data-table-wrap">
+        <table class="data-table">
             <thead>
                 <tr>
                     <th>Dự Án</th>
-                    <th>Loại</th>
-                    <th>Status</th>
-                    <th>Nhóm Vấn Đề</th>
-                    <th>Chi Tiết Tình Hình</th>
-                    <th>CR</th>
-                    <th>Hướng Xử Lý PMO</th>
+                    <th>Khối Lượng / SOW</th>
+                    <th>Hiện Trạng Triển Khai</th>
+                    <th>Chi Phí / Công Đã Phát Sinh</th>
+                    <th>Căn Cứ Phê Duyệt Triển Khai</th>
+                    <th>Vướng Mắc Hiện Tại</th>
+                    <th>Ngày Dự Kiến Ký</th>
+                    <th>Giới Hạn Nguồn Lực (Guardrails) Đề Xuất</th>
                 </tr>
             </thead>
-            <tbody id="riskTableBody"></tbody>
+            <tbody>
+<tr>
+        <td><strong>CENTRAL PARK (Gamuda Land)</strong></td>
+        <td>CGI (12 views)</td>
+        <td>Đang triển khai: Lock 10/12 camera; đang làm 3D Model</td>
+        <td style="color:var(--accent-amber)">Phát sinh ~2 tuần công dựng model & bố cục camera</td>
+        <td><strong style="color:var(--accent-emerald)">ĐÃ CÓ CHỈ THỊ & PHÊ DUYỆT TỪ BAN GIÁM ĐỐC (BOD)</strong></td>
+        <td>Đang hoàn tất thủ tục báo giá và thẩm định pháp lý hợp đồng mẫu Gamuda</td>
+        <td><strong>20/10/2026</strong></td>
+        <td><div class="guardrail-box">GIỚI HẠN: Chỉ dừng ở bước duyệt Model & Camera Lock. TUYỆT ĐỐI KHÔNG RENDER DRAFT CHI TIẾT cho đến khi có HĐ hoặc PO chính thức.</div></td>
+    </tr><tr>
+        <td><strong>ECO PK5.1 - HĐ 11 (Ecopark)</strong></td>
+        <td>CGI (19 views) & Anim (8-10 shots)</td>
+        <td>CGI: Đã lock cam, đang chờ model final. Anim: Chưa triển khai</td>
+        <td style="color:var(--accent-amber)">Phát sinh ~1 tuần công setup camera CGI</td>
+        <td><strong style="color:var(--accent-emerald)">ĐÃ CÓ CHỈ THỊ & PHÊ DUYỆT TỪ BAN GIÁM ĐỐC (BOD)</strong></td>
+        <td>Phòng Growth đang hoàn thiện Phương án sản xuất (PASX) để trình CĐT duyệt biểu phí</td>
+        <td><strong>20/10/2026</strong></td>
+        <td><div class="guardrail-box">GIỚI HẠN: Chỉ sản xuất phân kỳ 1 (6 views). KHÔNG SẢN XUẤT ANIMATION và phân kỳ 2 cho đến khi ký xong HĐ 11 bản cứng.</div></td>
+    </tr><tr>
+        <td><strong>ECO KV - HĐ 11 (Ecopark)</strong></td>
+        <td>CGI (3 views)</td>
+        <td>Đang lock cam và dựng draft sơ bộ</td>
+        <td style="color:var(--accent-amber)">Phát sinh công dựng khung hình KV</td>
+        <td><strong style="color:var(--accent-emerald)">ĐI CHUNG PHÊ DUYỆT HĐ 11 CỦA KHU 5.1 (TỪ BOD)</strong></td>
+        <td>Gộp chung hợp đồng với Phân khu 5.1</td>
+        <td><strong>20/10/2026</strong></td>
+        <td><div class="guardrail-box">GIỚI HẠN: Tối đa 2 artist tập trung 2 view chính; không mở rộng khối lượng.</div></td>
+    </tr><tr>
+        <td><strong>ECO 8.2 - HĐ 12 (Ecopark)</strong></td>
+        <td>CGI (SOW chưa xác định)</td>
+        <td>ĐANG CHUẨN BỊ (CHƯA TRIỂN KHAI SẢN XUẤT)</td>
+        <td style="color:var(--accent-amber)">0 VNĐ (Chưa bố trí nhân lực)</td>
+        <td><strong style="color:var(--accent-emerald)">Chưa có phê duyệt triển khai</strong></td>
+        <td>Chưa có SOW chi tiết và file kỹ thuật từ CĐT</td>
+        <td><strong>Sau khi hoàn thành HĐ 11</strong></td>
+        <td><div class="guardrail-box">GIỚI HẠN: GIỮ NGUYÊN CHƯA TRIỂN KHAI. Không bố trí artist cho đến khi ký xong HĐ 11 và có đề bài HĐ 12.</div></td>
+    </tr><tr>
+        <td><strong>ĐẢO CHÂU ÂU - VINH (Ecopark)</strong></td>
+        <td>CGI (1 Birdview update)</td>
+        <td>ĐÃ HOÀN THÀNH 100%, ĐÃ BÀN GIAO CHỜ NGHIỆM THU</td>
+        <td style="color:var(--accent-amber)">Đã hoàn thành toàn bộ chi phí sản xuất</td>
+        <td><strong style="color:var(--accent-emerald)">Gộp theo thỏa thuận chung dự án Ecopark</strong></td>
+        <td>CĐT gộp vào đợt thanh toán chung của Ecopark</td>
+        <td><strong>Cuối T10/2026</strong></td>
+        <td><div class="guardrail-box">Close task sản xuất; bàn giao 100% hồ sơ sang Growth để gộp vào phụ lục thanh toán.</div></td>
+    </tr>
+            </tbody>
         </table>
     </div>
 </div>
-</div>
 
-<div id="tab-payment" class="tab-content">
-<div class="section">
+<!-- TAB 5: PENDING PROJECTS -->
+<div id="tab-pending" class="tab-content">
     <div class="section-header">
-        <div class="section-icon" style="background:rgba(16,185,129,0.15)">💰</div>
-        <h2>Trạng Thái Thanh Toán Theo Đợt</h2>
-        <span class="section-badge" style="background:rgba(16,185,129,0.15);color:var(--accent-emerald)">Dựa trên Payment Term từng HĐ</span>
+        <h2>Danh Mục Dự Án Tạm Dừng / Pending (Mục 5 BOD)</h2>
+        <span class="section-badge">7 hạng mục tạm ngưng</span>
     </div>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px;padding:12px 16px;background:rgba(99,102,241,0.05);border-radius:var(--radius-sm);border-left:3px solid var(--accent-blue)">
-        📌 <strong>Lưu ý:</strong> PM ghi nhận các mốc đủ điều kiện thanh toán. Theo dõi công nợ / đòi tiền thuộc trách nhiệm phòng Growth/Sale. Các hạng mục con cùng 1 HĐ ghi chú "Chung HĐ".
-    </p>
-    <div class="payment-grid" id="paymentGrid"></div>
-</div>
-</div>
-
-<div id="tab-pm" class="tab-content">
-<div class="section">
-    <div class="section-header">
-        <div class="section-icon" style="background:rgba(168,85,247,0.15)">👤</div>
-        <h2>Phân Bổ Nhân Sự PM</h2>
+    <div class="data-table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Chủ Đầu Tư</th>
+                    <th>Dự Án & Hạng Mục</th>
+                    <th>PM</th>
+                    <th>Lý Do Tạm Dừng Cụ Thể</th>
+                    <th>Điều Kiện Tái Khởi Động (Restart Condition)</th>
+                    <th>Ngày Rà Soát Tiếp Theo</th>
+                    <th>Nghĩa Vụ Thanh Toán & Rủi Ro</th>
+                </tr>
+            </thead>
+            <tbody>
+<tr>
+        <td>1</td>
+        <td><strong>GIDEV</strong></td>
+        <td style="color:var(--accent-cyan)">Đông Tăng Long (CGI)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>CĐT chậm phản hồi >30 ngày và nợ Đợt 2 quá hạn từ 14/08/2026 (đã gửi công văn đòi nợ)</td>
+        <td style="color:var(--accent-emerald)">CĐT hoàn tất thanh toán 100% công nợ Đợt 2 (20% giá trị HĐ) và ký xác nhận nghiệm thu giai đoạn cũ</td>
+        <td><strong>20/10/2026</strong></td>
+        <td>Nợ khó đòi, đề xuất BOD/Pháp chế can thiệp</td>
+    </tr><tr>
+        <td>2</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan)">Phố Nối (CGI)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>CĐT điều chỉnh quy hoạch & thiết kế kiến trúc sản phẩm (lý do khách quan từ phía CĐT)</td>
+        <td style="color:var(--accent-emerald)">CĐT ban hành hồ sơ bản vẽ thiết kế quy hoạch Final và phê duyệt Phụ lục chi phí phát sinh</td>
+        <td><strong>25/10/2026</strong></td>
+        <td>Đã TT Đ1 (30%), chưa đủ điều kiện Đ2</td>
+    </tr><tr>
+        <td>3</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan)">Phố Nối (Animation)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>CĐT cân nhắc lại treatment/kịch bản do thiết kế dự án bị thay đổi</td>
+        <td style="color:var(--accent-emerald)">CĐT chốt phương án kịch bản phim sau khi thiết kế kiến trúc được phê duyệt</td>
+        <td><strong>25/10/2026</strong></td>
+        <td>Chung HĐ Phố Nối</td>
+    </tr><tr>
+        <td>4</td>
+        <td><strong>MIK GROUP</strong></td>
+        <td style="color:var(--accent-cyan)">Phố Nối (VR 360)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>Chờ CĐT lock camera tiện ích và phê duyệt thiết kế UX/UI chi tiết</td>
+        <td style="color:var(--accent-emerald)">CĐT xác nhận thiết kế UX/UI round 2 và chốt vị trí các điểm đứng 360</td>
+        <td><strong>25/10/2026</strong></td>
+        <td>Đã TT Đ1 (40%)</td>
+    </tr><tr>
+        <td>5</td>
+        <td><strong>AN THỊNH GROUP</strong></td>
+        <td style="color:var(--accent-cyan)">Legacy Nexus (CGI)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>CĐT chậm phản hồi 1-2 tuần (gửi Draft 2 P1 ngày 28/09 và Cam P2 ngày 23/09 chưa có ý kiến)</td>
+        <td style="color:var(--accent-emerald)">CĐT gửi văn bản phản hồi feedback chính thức cho Phase 1 và duyệt Cam Phase 2</td>
+        <td><strong>18/10/2026</strong></td>
+        <td>Đã xuất hồ sơ Đợt 1 (40%), chờ CĐT thanh toán</td>
+    </tr><tr>
+        <td>6</td>
+        <td><strong>AN THỊNH GROUP</strong></td>
+        <td style="color:var(--accent-cyan)">Legacy Hill (CGI)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>CĐT chậm phản hồi >3 tuần (Draft 2 gửi 19/09, Cam proposal gửi 12/09 chưa duyệt)</td>
+        <td style="color:var(--accent-emerald)">CĐT duyệt góc camera Phase 3 và chốt phản hồi cho 8 view Phase 1&2</td>
+        <td><strong>18/10/2026</strong></td>
+        <td>Đã xuất hồ sơ Đợt 1 (40%), chờ CĐT thanh toán</td>
+    </tr><tr>
+        <td>7</td>
+        <td><strong>AN THỊNH GROUP</strong></td>
+        <td style="color:var(--accent-cyan)">Legacy Hill (Animation)</td>
+        <td><strong>Quyên Lê</strong></td>
+        <td>CĐT chậm phản hồi kịch bản treatment và storyboard (>3 tuần)</td>
+        <td style="color:var(--accent-emerald)">Book được lịch họp trực tiếp present storyboard với CĐT</td>
+        <td><strong>18/10/2026</strong></td>
+        <td>Chung HĐ Legacy Hill</td>
+    </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="pm-workload-grid" id="pmGrid"></div>
-</div>
-</div>
-
-<div id="tab-charts" class="tab-content">
-<div class="section">
-    <div class="section-header">
-        <div class="section-icon" style="background:rgba(34,211,238,0.15)">📊</div>
-        <h2>Biểu Đồ Thống Kê</h2>
-    </div>
-    <div class="charts-grid">
-        <div class="chart-card">
-            <h3>Phân Bổ Trạng Thái Dự Án (27 hạng mục)</h3>
-            <div class="donut-container" id="statusDonut"></div>
-        </div>
-        <div class="chart-card">
-            <h3>Phân Bổ Theo Loại Hình Công Việc</h3>
-            <div class="donut-container" id="categoryDonut"></div>
-        </div>
-        <div class="chart-card">
-            <h3>Phân Bổ Nhóm Vấn Đề (20 dự án đang triển khai)</h3>
-            <div class="bar-chart" id="issueBarChart"></div>
-        </div>
-        <div class="chart-card">
-            <h3>Khối Lượng Công Việc Theo PM (đang triển khai)</h3>
-            <div class="bar-chart" id="pmBarChart"></div>
-        </div>
-    </div>
-</div>
 </div>
 
 <footer class="dashboard-footer">
-    <p>VistaX JSC — PM Department | Dashboard generated on 10/10/2026</p>
-    <p style="margin-top:4px">Dữ liệu trích xuất từ PM Weekly Report 261010.xlsx — Sheet 10102026</p>
+    <p>VistaX JSC — PM Department | Executive Dashboard generated on 12/10/2026</p>
+    <p style="margin-top:4px">Được chuẩn hóa theo phản hồi và chỉ đạo nghiệp vụ từ Ban Giám Đốc (BOD)</p>
 </footer>
 
 <script>
-const projects = [{"investor": "MIK GROUP", "project": "VŨ YÊN", "category": "CGI", "sow": "44 view", "pm": "Quyên Lê", "target": "30/10/2026", "status": "Critical", "progress": "Pre Final", "issue": "Vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng bàn giao", "risk": "", "cr": "CR_0", "detail": "Phase 2 (10 hình): NT 5 hình. 03/10: Gửi phương án từ Anh Hiếu → KH vẫn chưa hài lòng. Phase 1 (10 hình): NT 7 hình, 1 pending. Phase 3 (3 hình): 08/10 KH confirm góc cam, team bắt đầu triển khai next-step.", "pmo": "Đã gửi mail giải thích, đề xuất họp trực tiếp 2 bên. Mục tiêu chậm nhất 20/10 close Phase 1&2. Tiếp tục triển khai Phase 3.", "payment": "4 đợt: Đ1-20%, Đ2-30% (NT 40%), Đ3-30% (NT 70%), Đ4-20%. Đã thanh toán Đ1", "biennhan": "Chưa đủ điều kiện thanh toán đợt 2", "stt": 1}, {"investor": "MIK GROUP", "project": "VŨ YÊN", "category": "Animation", "sow": "Phase 1: 8 shot", "pm": "Quyên Lê", "target": "30/10/2026", "status": "Critical", "progress": "Final", "issue": "Vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng bàn giao", "risk": "", "cr": "CR_0", "detail": "01/10: KH feedback 2 shot đêm. Team gửi lại 06/10 → KH vẫn chưa đồng ý. Team thử thêm phương án & gửi lại frame check 12/10, chờ KH phản hồi.", "pmo": "Cố vấn kỹ thuật follow sát KH & làm việc/tư vấn team kỹ thuật để dứt điểm trong tháng 10.", "payment": "(Chung HĐ Vũ Yên)", "biennhan": "", "stt": 2}, {"investor": "ECO", "project": "Eco KV - HĐ 11", "category": "CGI", "sow": "3 view", "pm": "Quyên Lê", "target": "30/11/2026", "status": "At Risk", "progress": "Draft 1", "issue": "KH update model liên tục & tiến độ gấp", "risk": "", "cr": "CR-0", "detail": "Đang lock cam. Sản xuất cuốn chiếu các view. Dự kiến gửi KV1-KV2 Draft 1.", "pmo": "PM dự án làm việc với KH, quản lý feedback & đảm bảo timeline.", "payment": "(Chung HĐ Eco HĐ 11)", "biennhan": "", "stt": 3}, {"investor": "ECO", "project": "Eco PK5.1 - HĐ 11", "category": "CGI", "sow": "19 view", "pm": "Quyên Lê", "target": "20/10/2026", "status": "At Risk", "progress": "Camera Lock", "issue": "KH update model liên tục & tiến độ gấp", "risk": "", "cr": "CR-0", "detail": "30/09: KH lock cam. Team chờ xác nhận modeling. 05/10: PM cập nhật PASX cho Growth triển khai làm HĐ. Growth đang follow triển khai HĐ với KH.", "pmo": "PM gửi file model cho KH xác nhận. Theo dõi sát tiến độ & đảm bảo không bị ảnh hưởng bởi việc KH cập nhật model liên tục.", "payment": "05/10: PM cập nhật PASX cho Growth triển khai làm HĐ", "biennhan": "Phòng Growth đang triển khai HĐ với Khách hàng", "stt": 4}, {"investor": "THẮNG LỢI GROUP", "project": "THE WIN CITY", "category": "Animation", "sow": "Full phim (3 Phút)", "pm": "Kiều Như", "target": "17/10/2026", "status": "At Risk", "progress": "Pre Final", "issue": "Khách hàng không chuyên nghiệp trong việc feedback", "risk": "", "cr": "", "detail": "10/10: Bàn giao film full, chờ KH phản hồi. Chốt lịch thu voice talent thứ 4 tuần sau. Kế hoạch chỉnh sửa trực tiếp tại studio để KH xác nhận/ký nghiệm thu tại chỗ.", "pmo": "Gửi sản phẩm bàn giao qua mail làm cơ sở. Đề xuất cut-down kịch bản với KH.", "payment": "(Chung HĐ The Win City)", "biennhan": "", "stt": 5}, {"investor": "BICAMEX TOKYU", "project": "The Ten II", "category": "CGI", "sow": "12 view", "pm": "Kiều Như", "target": "07/11/2026", "status": "On Track", "progress": "Modeling", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "07/10: Team gửi camera & tonemood proposal, chờ KH duyệt (kì vọng 12/10). Kế hoạch triển khai có điều chỉnh nhẹ về timeline do phản hồi từ CĐT.", "pmo": "PM follow sát KH để lấy confirm góc camera 12/10. Xác lập timeline mới sau khi nhận xác nhận.", "payment": "3 đợt: Đ1-30% (gửi đề xuất góc cam), Đ2-30% (NT nháp 2), Đ3-40%. Chưa nhận tt Đ1", "biennhan": "Đến hạn đợt 1 chưa thanh toán. Team Growth follow up chase thanh toán", "stt": 6}, {"investor": "ECO", "project": "Eco PK5.1 - HĐ 11", "category": "Animation", "sow": "8-10 shot phim", "pm": "Quyên Lê", "target": "Cập nhật sau", "status": "On Track", "progress": "Chưa triển khai", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "KH gửi kịch bản sản xuất để team render shot rời dựa trên kịch bản/brief. Chưa triển khai.", "pmo": "Làm việc với KH để có thông tin chi tiết hơn về brief/timeline trong tuần tới.", "payment": "(Chung HĐ Eco HĐ 11)", "biennhan": "", "stt": 7}, {"investor": "ECO", "project": "Eco PK8.2 - HĐ 12", "category": "CGI", "sow": "(Chờ thêm thông tin)", "pm": "Quyên Lê", "target": "Cập nhật sau", "status": "On Track", "progress": "Chưa triển khai", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "Chờ thêm thông tin. Sẽ triển khai sau khi hoàn thành HĐ 11.", "pmo": "Follow với KH nhận đề bài & file kỹ thuật cần thiết. Sắp xếp KH triển khai sau HĐ 11.", "payment": "Chưa triển khai HĐ", "biennhan": "Chưa triển khai HĐ", "stt": 8}, {"investor": "ECO", "project": "Forest Retreat PK8 - HĐ 08", "category": "CGI", "sow": "Phase 1: 7 views + Phase 2: 5 streetview", "pm": "Quyên Lê", "target": "30/10/2026", "status": "On Track", "progress": "Draft 1", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "Tạm pending do ưu tiên PK5.1. 30/09: Bàn giao NT Phase 1 – Phase 2, chờ KH xác nhận cmt điều chỉnh.", "pmo": "Follow up. Làm việc với KH đảm bảo timeline kì vọng.", "payment": "2 đợt: Đ1-50%, Đ2-50%. Chưa nhận tt Đ1", "biennhan": "Đến hạn đợt 1 chưa thanh toán. Growth hoàn thành hồ sơ, chờ thanh toán", "stt": 9}, {"investor": "ECO", "project": "Đảo Châu Âu - Vinh (Tạm HĐ 11)", "category": "CGI", "sow": "1 Birdview (update model)", "pm": "Quyên Lê", "target": "30/10/2026", "status": "On Track", "progress": "Modeling", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "Đã bàn giao sản phẩm, chờ KH xác nhận nghiệm thu.", "pmo": "Follow up. Mục tiêu close task. PM push KH phản hồi.", "payment": "Chưa triển khai HĐ", "biennhan": "Chưa triển khai HĐ", "stt": 10}, {"investor": "GAMUDA LAND", "project": "CENTRAL PARK", "category": "CGI", "sow": "12 View", "pm": "Kiều Như", "target": "30/11/2026", "status": "On Track", "progress": "Modeling", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "10/10: Gửi KH xác nhận model. Camera lock 10/12 view (2 view còn lại gửi 13/10). Phase 1 (6 view): bắt đầu 12/10, draft 1 ngày 19/10. Phase 2 (6 view): bắt đầu 20/10, draft 1 ngày 27/10.", "pmo": "Lấy confirm model & chốt camera 2 view còn lại. Team Delivery triển khai đúng timeline.", "payment": "Chưa triển khai HĐ", "biennhan": "Chưa triển khai HĐ", "stt": 11}, {"investor": "MIK GROUP", "project": "KHAI SƠN", "category": "CGI", "sow": "33 view", "pm": "Quyên Lê", "target": "12/10/2026", "status": "On Track", "progress": "Pre Final", "issue": "Không có", "risk": "", "cr": "Phát sinh chi phí dựng model (scope dựng hình nội thất)", "detail": "03/10: NT 4 view tổng thể, 5 view kiến trúc, 8 tiện ích (NT 5, còn 3 final gửi 07/10), 14 nội thất (NT 11, còn 3 final gửi 07/10). Kì vọng hoàn tất close dự án.", "pmo": "Team điều chỉnh 6 hình còn lại, kì vọng gửi lại trước 07/10 & hoàn tất close dự án.", "payment": "4 đợt: Đ1-20%, Đ2-30% (NT 40%), Đ3-30% (NT 70%), Đ4-20%. Đã ttoán Đ1 & Đ2", "biennhan": "Đến hạn đợt 3 chưa thanh toán. Growth chuẩn bị hồ sơ gửi KH, follow thu hồi công nợ", "stt": 12}, {"investor": "MIK GROUP", "project": "KHAI SƠN", "category": "VR 360", "sow": "35 hình", "pm": "Quyên Lê", "target": "20/10/2026", "status": "On Track", "progress": "Draft 1", "issue": "Không có", "risk": "", "cr": "CR_0", "detail": "10/10: Đã gửi link VR360 nội thất cho KH review vào ngày 08/10. Đang push phần VR ngoại thất/tiện ích. Tổng 35 view: 4 tổng thể (done), 10 tiện ích (draft 1), 17 căn hộ (draft 1), 4 góc bổ trợ (draft 1).", "pmo": "PM follow KH thật sát để có phản hồi cho team điều chỉnh. Kì vọng close trước 20/10.", "payment": "(Chung HĐ Khai Sơn VR360)", "biennhan": "", "stt": 13}, {"investor": "MIK GROUP", "project": "KHAI SƠN", "category": "Animation", "sow": "Full Phim - 3 Phút", "pm": "Quyên Lê", "target": "20/10/2026", "status": "On Track", "progress": "Final (DONE)", "issue": "Không có", "risk": "", "cr": "CR_0", "detail": "03/10: Bàn giao film full & teaser 30s, 15s, 60s có subtitle, phim Full subtitle. DONE.", "pmo": "PM push KH nghiệm thu hạng mục này. Mục tiêu close task trước ngày 20/10.", "payment": "(Chung HĐ Khai Sơn Animation)", "biennhan": "", "stt": 14}, {"investor": "MIK GROUP", "project": "OCP1.2", "category": "CGI", "sow": "55 Hình", "pm": "Kiều Như", "target": "31/12/2026", "status": "On Track", "progress": "Pre Final", "issue": "KH cập nhật thiết kế trong phạm vi team có thể support", "risk": "", "cr": "Phụ lục 01 - Thay đổi scope of work (phát sinh giảm hình CGI, tăng ảnh mặt bằng)", "detail": "Phase 1 (12 view): NT đủ 12 view. Phase 2 (7 view): 14/10 gửi final. Phase 3 (5 view nội thất): 09/10 KH chốt 3 góc cam, 18/10 gửi Draft 1 (3 view NT) + 2 góc cam mới. Phase 4 (10 MB bóc mái): 14/10–17/10 gửi đủ 10 căn.", "pmo": "Follow up. Push KH chốt cam Phase 3 và model Phase 4.", "payment": "3 đợt: Đ1-30%, Đ2-40% (NT 60%), Đ3-30%. Đã ttoán Đ1", "biennhan": "Đến hạn đợt 2 chưa thanh toán. Growth cập nhật phụ lục chờ KH ký bản cứng.", "stt": 15}, {"investor": "MIK GROUP", "project": "VŨ YÊN", "category": "VR 360", "sow": "20 view", "pm": "Quyên Lê", "target": "30/10/2026", "status": "On Track", "progress": "Draft 2", "issue": "Không có", "risk": "", "cr": "CR_0", "detail": "08/10: Gửi 1 view VR360 tổng thể, chờ KH xác nhận. UX/UI & CODING: 30/09 KH gửi feedback round 5, team đang xử lý. Cần KH tổng hợp thông tin section mặt bằng + căn hộ.", "pmo": "Cần KH tổng hợp thông tin section mặt bằng + căn hộ để cập nhật nội dung trong round tiếp theo.", "payment": "(Chung HĐ Vũ Yên)", "biennhan": "", "stt": 16}, {"investor": "THẮNG LỢI GROUP", "project": "THE WIN CITY", "category": "CGI", "sow": "13 view", "pm": "Kiều Như", "target": "15/10/2026", "status": "On Track", "progress": "Draft 2", "issue": "Không có", "risk": "", "cr": "Phụ lục 01 (Giảm scope bóc mái, phát sinh tăng gói AI Film, Phụ đề Anh-Trung)", "detail": "GĐ1: 9 view đã NT qua mail 04/09. GĐ2: 2 view đã chốt camera & tonemood, Draft 2 giao 07/10, đang chờ KH phản hồi.", "pmo": "PM follow sát để close dự án trong tuần tới.", "payment": "3 đợt: Đ1-30%, Đ2-40% (NT hình nháp và phim nháp), Đ3-30%. Đã ttoán Đ1", "biennhan": "Đến hạn đợt 2 chưa thanh toán. Growth hoàn thành hồ sơ, chờ thanh toán", "stt": 17}, {"investor": "TIẾN PHƯỚC", "project": "SENTURIA NAM SÀI GÒN", "category": "CGI", "sow": "18 View", "pm": "Kiều Như", "target": "09/11/2026", "status": "On Track", "progress": "Cam Proposal", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "10/10: Team gửi cam proposal, chờ KH review & phản hồi (deadline xác nhận 13/10).", "pmo": "PM follow sát để chốt camera angle & đảm bảo dự án triển khai đúng kì vọng.", "payment": "3 đợt: Đ1-30%, Đ2-40% (NT nháp 1), Đ3-30%. Chưa nhận tt Đ1", "biennhan": "Đến hạn đợt 1 chưa thanh toán. KH hẹn thanh toán ngày 12/10", "stt": 18}, {"investor": "TIẾN PHƯỚC", "project": "SENTURIA NAM SÀI GÒN", "category": "VR 360", "sow": "11 view", "pm": "Kiều Như", "target": "04/12/2026", "status": "On Track", "progress": "UX/UI Design", "issue": "Không có", "risk": "", "cr": "CR-0", "detail": "06/10: Họp present với KH. Đang chờ KH input thêm dữ liệu flow trải nghiệm.", "pmo": "PM present với KH để lấy ý kiến về style thiết kế, flow trải nghiệm & UX/UI cơ bản.", "payment": "(Chung HĐ Senturia)", "biennhan": "", "stt": 19}, {"investor": "ECO PARK", "project": "Eco PK5 + PK7 - HĐ 09", "category": "CGI", "sow": "31 view", "pm": "Quyên Lê", "target": "Cập nhật sau", "status": "Delayed", "progress": "Pending", "issue": "KH tạm pending, dự kiến quay lại cuối T10 - đầu T11", "risk": "", "cr": "CR_0", "detail": "Dự án tạm pending. KH hẹn sẽ quay lại với phản hồi cuối tháng 10 – đầu tháng 11. Đã hoàn thành hồ sơ biên nhận.", "pmo": "Theo dõi & chờ KH xác nhận tiếp tục. Không sản xuất thêm cho đến khi nhận phản hồi từ KH.", "payment": "1 đợt - 100% (Chưa thanh toán)", "biennhan": "Đến hạn đợt 1 chưa thanh toán. Đã hoàn thành hồ sơ, chờ KH thanh toán.", "stt": 20}];
-
 function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     if (btn) btn.classList.add('active');
 }
-
-function renderProjectTable() {
-    const tbody = document.getElementById('projectTableBody');
-    let html = '';
-    projects.forEach((p, i) => {
-        const statusClass = p.status === 'On Track' ? 'ontrack' : p.status === 'At Risk' ? 'atrisk' : p.status === 'Delayed' ? 'delayed' : p.status === 'Critical' ? 'critical' : 'na';
-        const catClass = p.category === 'CGI' ? 'cgi' : p.category.includes('VR') ? 'vr' : 'anim';
-        const issueColor = p.issue === 'Không có' ? 'issue-none' : (p.issue.includes('chất lượng') || p.issue.includes('Vượt') || p.issue.includes('không chuyên nghiệp')) ? 'issue-quality' : 'issue-client';
-        html += `<tr>
-            <td>${p.stt || '-'}</td>
-            <td style="font-weight:600;font-size:12px">${p.investor}</td>
-            <td style="font-weight:600;color:var(--accent-cyan)">${p.project}</td>
-            <td><span class="badge-cat badge-${catClass}">${p.category}</span></td>
-            <td style="font-size:12px;color:var(--text-secondary);max-width:140px">${p.sow}</td>
-            <td style="font-weight:600;font-size:12px">${p.pm}</td>
-            <td style="font-size:12px;white-space:nowrap">${p.target}</td>
-            <td><span class="badge badge-${statusClass}">${getStatusIcon(p.status)} ${p.status || 'N/A'}</span></td>
-            <td style="font-size:12px">${p.progress || '-'}</td>
-            <td style="font-size:12px;max-width:200px"><span class="issue-cat ${issueColor}">${truncate(p.issue, 60)}</span></td>
-            <td style="font-size:12px;max-width:250px;color:var(--text-secondary)">${truncate(p.pmo, 100)}</td>
-        </tr>`;
-    });
-    tbody.innerHTML = html;
-}
-
-function getStatusIcon(status) {
-    switch(status) {
-        case 'On Track': return '🟢'; case 'At Risk': return '🟡';
-        case 'Delayed': return '🟠'; case 'Critical': return '🔴'; default: return '⚪';
-    }
-}
-function truncate(str, len) { if (!str) return '-'; return str.length > len ? str.substring(0, len) + '...' : str; }
-
-function renderRiskTable() {
-    const tbody = document.getElementById('riskTableBody');
-    const riskProjects = projects.filter(p => p.status === 'Critical' || p.status === 'At Risk' || p.status === 'Delayed');
-    let html = '';
-    riskProjects.forEach(p => {
-        const statusClass = p.status === 'At Risk' ? 'atrisk' : p.status === 'Delayed' ? 'delayed' : 'critical';
-        let issueCategory = 'Không xác định';
-        if (p.issue.includes('chậm phản hồi') || p.issue.includes('pending')) issueCategory = '⏳ KH chậm / tạm pending';
-        else if (p.issue.includes('Vượt quá')) issueCategory = '🔁 Vượt quá lần chỉnh sửa';
-        else if (p.issue.includes('không chuyên nghiệp')) issueCategory = '🚫 KH feedback không chuyên nghiệp';
-        else if (p.issue.includes('chất lượng') || p.issue.includes('outsource')) issueCategory = '🔧 Chất lượng delivery';
-        else if (p.issue.includes('update model') || p.issue.includes('liên tục')) issueCategory = '🔄 KH update model liên tục';
-        else if (p.issue.includes('điều chỉnh thiết kế') || p.issue.includes('cập nhật thiết kế')) issueCategory = '📐 KH điều chỉnh thiết kế';
-        else if (p.issue === 'Không có') issueCategory = '✅ Không có issue';
-        const crDisplay = (p.cr && p.cr !== 'CR_0' && p.cr !== 'CR-0') ? `<span class="cr-badge cr-yes">⚡ ${truncate(p.cr,30)}</span>` : `<span class="cr-badge cr-no">Không có</span>`;
-        html += `<tr>
-            <td style="font-weight:600;color:var(--accent-cyan)">${p.project}</td>
-            <td><span class="badge-cat badge-${p.category === 'CGI' ? 'cgi' : p.category.includes('VR') ? 'vr' : 'anim'}">${p.category}</span></td>
-            <td><span class="badge badge-${statusClass}">${getStatusIcon(p.status)} ${p.status}</span></td>
-            <td style="font-size:12px">${issueCategory}</td>
-            <td style="font-size:12px;max-width:300px;color:var(--text-secondary)">${p.detail}</td>
-            <td>${crDisplay}</td>
-            <td style="font-size:12px;max-width:250px;color:var(--text-secondary)">${p.pmo}</td>
-        </tr>`;
-    });
-    tbody.innerHTML = html;
-}
-
-function renderPaymentSection() {
-    const grid = document.getElementById('paymentGrid');
-    const groups = [
-        {
-            title: '⏳ Đến Hạn Đợt 3 Chưa Thanh Toán',
-            color: 'var(--accent-purple)', bg: 'rgba(168,85,247,0.08)',
-            items: [
-                { name: 'KHAI SƠN (CGI — 33 view)', detail: 'Payment: 4 đợt (Đ1-20%, Đ2-30% NT 40%, Đ3-30% NT 70%, Đ4-20%). ✅ Đã thanh toán Đ1 & Đ2. ⏳ Đến hạn đợt 3 chưa thanh toán → Growth chuẩn bị hồ sơ, follow thu hồi công nợ.', statusClass: 'pay-status-ready' },
-            ]
-        },
-        {
-            title: '⏳ Đến Hạn Đợt 2 Chưa Thanh Toán',
-            color: 'var(--accent-orange)', bg: 'rgba(251,146,60,0.08)',
-            items: [
-                { name: 'ĐÔNG TĂNG LONG (CGI) 🔴 Ngưng triển khai', detail: 'Payment: 3 đợt (Đ1-50%, Đ2-20%, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đến hạn đợt 2 chưa thanh toán (quá hạn từ 14/08). ⚡ PMO: Ngưng triển khai đến khi nhận Đ2.', statusClass: 'pay-status-blocked' },
-                { name: 'THE WIN CITY (CGI + Animation)', detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT hình nháp + phim nháp, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đến hạn đợt 2 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.', statusClass: 'pay-status-ready' },
-                { name: 'OCP1.2 (CGI)', detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT 60%, Đ3-30%). ✅ Đã thanh toán Đ1. ⏳ Đến hạn đợt 2 chưa thanh toán → Growth cập nhật phụ lục chờ KH ký bản cứng.', statusClass: 'pay-status-ready' },
-            ]
-        },
-        {
-            title: '⏳ Đến Hạn Đợt 1 Chưa Thanh Toán',
-            color: 'var(--accent-amber)', bg: 'rgba(245,158,11,0.08)',
-            items: [
-                { name: 'ECO PK5 + PK7 - HĐ 09 (CGI)', detail: 'Payment: 1 đợt - 100%. ⏳ Đến hạn đợt 1 chưa thanh toán. Dự án tạm pending, KH hẹn cuối T10 – đầu T11.', statusClass: 'pay-status-ready' },
-                { name: 'LEGACY NEXUS (CGI)', detail: 'Payment: 3 đợt (Đ1-40%, Đ2-30% NT 60%, Đ3-30%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.', statusClass: 'pay-status-ready' },
-                { name: 'LEGACY HILL (CGI + Animation)', detail: 'Payment: 3 đợt (Đ1-40% NT cam & tone mood, Đ2-30% NT hình hoàn thiện, Đ3-30%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.', statusClass: 'pay-status-ready' },
-                { name: 'FOREST RETREAT PK8 - HĐ 08 (CGI)', detail: 'Payment: 2 đợt (Đ1-50%, Đ2-50%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth hoàn thành hồ sơ, chờ thanh toán.', statusClass: 'pay-status-ready' },
-                { name: 'THE TEN II (CGI)', detail: 'Payment: 3 đợt (Đ1-30% gửi đề xuất góc cam, Đ2-30% NT nháp 2, Đ3-40%). ⏳ Đến hạn đợt 1 chưa thanh toán → Growth follow up chase thanh toán.', statusClass: 'pay-status-ready' },
-                { name: 'SENTURIA NAM SÀI GÒN (CGI + VR360)', detail: 'Payment: 3 đợt (Đ1-30%, Đ2-40% NT nháp 1, Đ3-30%). ⏳ Đến hạn đợt 1 chưa thanh toán. KH hẹn thanh toán ngày 12/10.', statusClass: 'pay-status-pending' },
-            ]
-        },
-        {
-            title: '❌ Chưa Đủ Điều Kiện Thanh Toán',
-            color: 'var(--accent-rose)', bg: 'rgba(244,63,94,0.08)',
-            items: [
-                { name: 'VŨ YÊN (4 hạng mục: CGI + Animation + VR360)', detail: 'Payment: 4 đợt (Đ1-20%, Đ2-30% NT 40%, Đ3-30% NT 70%, Đ4-20%). ✅ Đã thanh toán Đ1. ❌ Chưa đủ điều kiện thanh toán đợt 2 (vượt quá số lần chỉnh sửa do KH chưa hài lòng chất lượng).', statusClass: 'pay-status-pending' },
-                { name: 'PHỐ NỐI (CGI + Animation + VR360)', detail: 'CGI: 3 đợt (Đ1-30%, Đ2-40% NT 60%, Đ3-30%). VR360: 3 đợt (Đ1-40%, Đ2-30% NT 70%, Đ3-30%). ✅ Đã thanh toán Đ1. ❌ Chưa đủ điều kiện thanh toán đợt 2 (tạm delay do CĐT điều chỉnh thiết kế).', statusClass: 'pay-status-pending' },
-            ]
-        },
-        {
-            title: '📋 Dự Án Chưa Có Hợp Đồng',
-            color: 'var(--text-muted)', bg: 'rgba(100,116,139,0.08)',
-            items: [
-                { name: 'CENTRAL PARK (CGI)', detail: 'Dự án chưa có hợp đồng (vừa kick-off client 29/09, đang triển khai modeling & camera proposal).', statusClass: 'pay-status-notstarted' },
-                { name: 'ECO PK5.1 - HĐ 11 (CGI + Animation)', detail: 'Dự án chưa có hợp đồng (05/10: PM cập nhật PASX, Growth đang triển khai làm HĐ).', statusClass: 'pay-status-notstarted' },
-                { name: 'ECO PK8.2 - HĐ 12 (CGI)', detail: 'Dự án chưa có hợp đồng. Sẽ triển khai sau khi hoàn thành HĐ 11.', statusClass: 'pay-status-notstarted' },
-                { name: 'ĐẢO CHÂU ÂU - VINH (CGI)', detail: 'Dự án chưa có hợp đồng riêng (tạm thuộc HĐ 11).', statusClass: 'pay-status-notstarted' },
-            ]
-        },
-    ];
-    let html = '';
-    groups.forEach(g => {
-        html += `<div class="payment-group">
-            <div class="payment-group-header" style="background:${g.bg};border-left:3px solid ${g.color}">
-                <span>${g.title}</span>
-                <span style="margin-left:auto;font-size:11px;color:var(--text-muted)">${g.items.length} dự án</span>
-            </div>
-            <div class="payment-group-body">`;
-        g.items.forEach(item => {
-            html += `<div class="payment-item ${item.statusClass}">
-                <div class="pay-proj">${item.name}</div>
-                <div class="pay-detail">${item.detail}</div>
-            </div>`;
-        });
-        html += `</div></div>`;
-    });
-    grid.innerHTML = html;
-}
-
-function renderPMWorkload() {
-    const grid = document.getElementById('pmGrid');
-    const pmData = {};
-    projects.forEach(p => {
-        let pmName = p.pm;
-        if (!pmData[pmName]) pmData[pmName] = { total: 0, onTrack: 0, atRisk: 0, delayed: 0, critical: 0, na: 0, projects: [] };
-        pmData[pmName].total++;
-        if (p.status === 'On Track') pmData[pmName].onTrack++;
-        else if (p.status === 'At Risk') pmData[pmName].atRisk++;
-        else if (p.status === 'Delayed') pmData[pmName].delayed++;
-        else if (p.status === 'Critical') pmData[pmName].critical++;
-        else pmData[pmName].na++;
-        pmData[pmName].projects.push(p.project + ' (' + p.category + ')');
-    });
-    let html = '';
-    Object.entries(pmData).sort((a, b) => b[1].total - a[1].total).forEach(([name, data]) => {
-        const uniqueProjects = [...new Set(data.projects)];
-        html += `<div class="pm-card">
-            <div class="pm-name">👤 ${name}</div>
-            <div class="pm-count">${data.total} hạng mục đang triển khai</div>
-            <div class="pm-status-row">
-                <div class="pm-stat"><div class="stat-num" style="color:var(--accent-emerald)">${data.onTrack}</div><div class="stat-label">On Track</div></div>
-                <div class="pm-stat"><div class="stat-num" style="color:var(--accent-amber)">${data.atRisk}</div><div class="stat-label">At Risk</div></div>
-                <div class="pm-stat"><div class="stat-num" style="color:var(--accent-orange)">${data.delayed}</div><div class="stat-label">Delayed</div></div>
-                <div class="pm-stat"><div class="stat-num" style="color:var(--accent-rose)">${data.critical}</div><div class="stat-label">Critical</div></div>
-            </div>
-            <div class="pm-projects-list">${uniqueProjects.map(p => `<span>${p}</span>`).join('')}</div>
-        </div>`;
-    });
-    grid.innerHTML = html;
-}
-
-function createDonut(containerId, data, colors) {
-    const container = document.getElementById(containerId);
-    const total = data.reduce((sum, d) => sum + d.value, 0);
-    let cumulative = 0;
-    const radius = 60;
-    const circumference = 2 * Math.PI * radius;
-    let circles = '';
-    data.forEach((d, i) => {
-        const pct = d.value / total;
-        const dashLength = pct * circumference;
-        const dashOffset = -(cumulative / total) * circumference;
-        circles += `<circle cx="80" cy="80" r="${radius}" fill="none" stroke="${colors[i]}" stroke-width="20"
-            stroke-dasharray="${dashLength} ${circumference - dashLength}"
-            stroke-dashoffset="${dashOffset}"
-            style="transform:rotate(-90deg);transform-origin:80px 80px;transition:stroke-dasharray 1s ease;" />`;
-        cumulative += d.value;
-    });
-    let legend = data.map((d, i) => `<div class="legend-item"><div class="legend-dot" style="background:${colors[i]}"></div><span>${d.label}</span><span class="legend-value">${d.value}</span></div>`).join('');
-    container.innerHTML = `<svg class="donut-svg" viewBox="0 0 160 160">${circles}<text x="80" y="76" text-anchor="middle" fill="white" font-size="24" font-weight="800">${total}</text><text x="80" y="96" text-anchor="middle" fill="#94a3b8" font-size="11">hạng mục</text></svg><div class="donut-legend">${legend}</div>`;
-}
-
-function createBarChart(containerId, data, colors) {
-    const container = document.getElementById(containerId);
-    const maxVal = Math.max(...data.map(d => d.value));
-    let html = '';
-    data.forEach((d, i) => {
-        const pct = maxVal > 0 ? (d.value / maxVal) * 100 : 0;
-        html += `<div class="bar-item"><div class="bar-label">${d.label}</div><div class="bar-track"><div class="bar-fill" data-value="${d.value}" style="width:${pct}%;background:${colors[i % colors.length]}"></div></div></div>`;
-    });
-    container.innerHTML = html;
-}
-
-function init() {
-    renderProjectTable();
-    renderRiskTable();
-    renderPaymentSection();
-    renderPMWorkload();
-
-    createDonut('statusDonut',
-        [{ label: 'On Track', value: 14 }, { label: 'At Risk', value: 3 }, { label: 'Delayed', value: 7 }, { label: 'Critical', value: 3 }],
-        ['#10b981', '#f59e0b', '#fb923c', '#ef4444']
-    );
-    createDonut('categoryDonut',
-        [{ label: 'CGI', value: 17 }, { label: 'Animation', value: 6 }, { label: 'VR 360', value: 4 }],
-        ['#3b82f6', '#ec4899', '#a855f7']
-    );
-    createBarChart('issueBarChart',
-        [
-            { label: 'Không có', value: 13 },
-            { label: 'Vượt chỉnh sửa', value: 2 },
-            { label: 'KH kém chuyên nghiệp', value: 1 },
-            { label: 'KH update model', value: 2 },
-            { label: 'KH tạm pending', value: 1 },
-            { label: 'KH cập nhật TK', value: 1 },
-        ],
-        ['#10b981', '#ef4444', '#f43f5e', '#f59e0b', '#fb923c', '#8b5cf6']
-    );
-    createBarChart('pmBarChart',
-        [{ label: 'Quyên Lê', value: 13 }, { label: 'Kiều Như', value: 7 }],
-        ['#6366f1', '#22d3ee']
-    );
-}
-document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
